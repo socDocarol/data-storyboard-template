@@ -5,10 +5,22 @@ All paths here are relative to the skill folder. Keep the package outside a note
 ## Create an app
 
 ```powershell
-python scripts/scaffold.py "C:/Projects/my-city-app" --title "Service Explorer" --sample services --future-source sql-server
+python scripts/scaffold.py "C:/Projects/my-city-app" --title "Service Explorer" --sample services --future-source sql-server --banner
 ```
 
-The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes a short `APP-BRIEF.md`; update that brief with the actual conversation. Supported sample names: services, spending. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only.
+The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes a short `APP-BRIEF.md`; update that brief with the actual conversation. Supported sample names: services, spending. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only. The default is no banner; use `--banner` only after the person chooses the bundled example image.
+
+`app_config.json` controls the banner. Use `"banner": null` for no banner, or a local asset object such as:
+
+```json
+"banner": {
+  "image": "assets/historic-city-hall.jpg",
+  "alt": "Historic City Hall in Sacramento",
+  "credit": "City of Sacramento · Historic City Hall"
+}
+```
+
+The image path is relative to the starter `www` directory and must point to an existing local PNG, JPG, JPEG, or WEBP inside that directory. Do not use URLs or paths outside `www`. For a supplied image, copy it into the generated app's `www/assets` directory and set this object; if it is not yet available, keep `banner` as `null` and note it as pending in `APP-BRIEF.md`.
 
 The generated app runs with `python start.py`, or by opening `Start app.cmd` on Windows with Python 3.12 installed. First launch installs the pinned runtime into that app's own `.venv`; subsequent launches reuse it. The launcher opens a local browser and keeps its terminal running. Stop with Ctrl+C. Never install packages in the user's notes vault.
 
@@ -24,7 +36,7 @@ py -3.12 -m venv .venv
 
 | Change | Owner |
 | --- | --- |
-| Title, introduction, audience, default example, portal URL | `app_config.json` |
+| Title, introduction, audience, default example, portal URL, banner image/alt/credit | `app_config.json` |
 | Page composition, reactive wiring, table row cap (`MAX_TABLE_ROWS`) | `app.py` |
 | Reusable header/footer, metric, state, chart presentation, and every sample/live wording (`disclosure`) | `city_app/components.py` |
 | Record fields, drill `DIMENSIONS`, data `STATES`, sort `ORDERS`, sample sources, `PROVIDERS` registry, filtering, month grouping, calculation, export | `city_app/data.py` |
@@ -64,7 +76,7 @@ Then inspect the running app in one batch:
 2. Category + area + status + month + text search, Reset filters, ordering, and a CSV matching the filtered results.
 3. Category → area → status → records, ancestor breadcrumbs, month selection, record drawer keyboard/refresh/Escape, and comparison scope/group links.
 4. Both examples and missing, stale, empty, error, and loading previews.
-5. Desktop 1440px, tablet 800px, mobile 390px, and narrow 320px. Inspect wide 2048px when shell/layout changes.
+5. Desktop 1440px and 1920px, tablet 800px, mobile 390px, and narrow 320px. Inspect wide 2048px when shell/layout changes. Confirm the City header keeps its height and identity, desktop gutters stay near 32px, the primary trend remains dominant, and a banner (if enabled) does not bury charts or sample labels.
 6. Keyboard navigation, skip link, mobile menu selection/Escape, chart exact-value tables, and absence of horizontal page overflow.
 
 Fix observed problems and confirm those fixes. Do not claim live-source validation, production readiness, or full accessibility conformance. For release-oriented work, the full visual guide's accessibility acceptance requirements still apply.

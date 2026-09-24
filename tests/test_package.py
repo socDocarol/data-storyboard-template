@@ -34,6 +34,7 @@ class PackageTests(unittest.TestCase):
             config = json.loads((destination / "app_config.json").read_text())
             self.assertEqual(config["title"], 'Spending "Review"')
             self.assertEqual(config["sample"], "spending")
+            self.assertIsNone(config["banner"])
             self.assertIn("sql-server", (destination / "APP-BRIEF.md").read_text())
             self.assertTrue(
                 (
@@ -50,6 +51,35 @@ class PackageTests(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((create.STARTER / "app_config.json").read_bytes(), original)
+
+    def test_scaffold_banner_is_opt_in_and_included_in_distribution(self):
+        create = module("scaffold")
+        with tempfile.TemporaryDirectory() as temporary:
+            destination = Path(temporary) / "With banner"
+            create.scaffold(
+                destination,
+                title="Example",
+                sample="services",
+                future_source="unknown",
+                banner=True,
+            )
+            config = json.loads(
+                (destination / "app_config.json").read_text(encoding="utf-8")
+            )
+            self.assertTrue((destination / "www" / config["banner"]["image"]).is_file())
+            self.assertIn(
+                "Bundled City Hall image selected",
+                (destination / "APP-BRIEF.md").read_text(encoding="utf-8"),
+            )
+        spec = importlib.util.spec_from_file_location(
+            "package", ROOT / "scripts/package.py"
+        )
+        package = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(package)
+        self.assertIn(
+            create.STARTER / "www/assets/historic-city-hall.jpg",
+            list(package.product_files()),
+        )
 
     def test_scaffold_refuses_existing_folder_and_does_not_touch_contents(self):
         create = module("scaffold")

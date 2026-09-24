@@ -4,5 +4,10 @@
   "audience": "City colleagues",
   "sample": "services",
   "portal_url": "https://insights-home.whitesmoke-a6bd011f.westus2.azurecontainerapps.io/",
-  "show_preview_controls": true
+  "show_preview_controls": true,
+  "banner": {
+    "image": "assets/historic-city-hall.jpg",
+    "alt": "Historic City Hall in Sacramento, framed by trees against a blue sky",
+    "credit": "City of Sacramento · Historic City Hall"
+  }
 }

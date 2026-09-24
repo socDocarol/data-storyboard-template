@@ -9,6 +9,7 @@ from pathlib import Path
 import app
 from city_app.components import (
     disclosure,
+    page_intro,
     selection_trail,
     state_panel,
     status_message,
@@ -56,6 +57,67 @@ class AppTests(unittest.TestCase):
         self.assertIn(
             "state-error", str(unavailable_panel(load_sample("services", "error")))
         )
+
+    def test_banner_can_be_omitted_and_has_accessible_image_and_credit(self):
+        plain = str(page_intro("Example", "Explore the data"))
+        self.assertNotIn("hero-image", plain)
+        self.assertEqual(plain.count("<h1"), 1)
+        banner = {
+            "image": "assets/historic-city-hall.jpg",
+            "alt": "Historic City Hall",
+            "credit": "City of Sacramento",
+        }
+        illustrated = str(page_intro("Example", "Explore the data", banner))
+        self.assertIn('alt="Historic City Hall"', illustrated)
+        self.assertIn("City of Sacramento", illustrated)
+        self.assertEqual(illustrated.count("<h1"), 1)
+
+    def test_banner_config_rejects_remote_outside_missing_and_invalid_images(self):
+        valid = json.loads((app.ROOT / "app_config.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "config.json"
+            for image in (
+                "https://example.com/photo.jpg",
+                "../samples/services.csv",
+                "assets/missing.jpg",
+                "assets/../../app.py",
+                "//example.com/photo.jpg",
+                "assets/fonts/Inter-LICENSE.txt",
+            ):
+                path.write_text(
+                    json.dumps({**valid, "banner": {"image": image, "alt": "Example"}}),
+                    encoding="utf-8",
+                )
+                with (
+                    self.subTest(image=image),
+                    self.assertRaisesRegex(ValueError, "banner image"),
+                ):
+                    app.read_config(path)
+            for banner in (
+                False,
+                {},
+                {"image": "assets/historic-city-hall.jpg", "alt": ""},
+            ):
+                path.write_text(
+                    json.dumps({**valid, "banner": banner}), encoding="utf-8"
+                )
+                with (
+                    self.subTest(banner=banner),
+                    self.assertRaisesRegex(ValueError, "banner must"),
+                ):
+                    app.read_config(path)
+            for banner in (
+                None,
+                {
+                    "image": "assets/historic-city-hall.jpg",
+                    "alt": "Historic City Hall",
+                    "credit": "City of Sacramento",
+                },
+            ):
+                path.write_text(
+                    json.dumps({**valid, "banner": banner}), encoding="utf-8"
+                )
+                self.assertEqual(app.read_config(path)["banner"], banner)
 
     def test_live_states_never_mention_simulations(self):
         live = replace(load_sample("services").source, is_sample=False)

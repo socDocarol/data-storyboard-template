@@ -22,6 +22,7 @@ def scaffold(
     sample: str,
     future_source: str,
     audience: str = "City colleagues",
+    banner: bool = False,
 ) -> Path:
     destination = destination.expanduser().resolve()
     if destination.exists():
@@ -56,6 +57,7 @@ def scaffold(
         sample=sample,
         audience=audience,
         description=SAMPLES[sample],
+        banner=config.get("banner") if banner else None,
     )
     config_file.write_text(
         json.dumps(config, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
@@ -68,6 +70,7 @@ def scaffold(
         "Actually inspected: bundled fictional sample only.\n\n"
         "Confirmed: sample-data prototype; real source definitions are not verified.\n\n"
         f"Defaults: Home, Explore, Compare, and About using the {sample} example; shared selection, drilldowns, record details, and group comparison.\n\n"
+        f"Banner: {'Bundled City Hall image selected.' if banner else 'No banner image selected; keep the layout without an image unless the user opts in.'}\n\n"
         "Unresolved meanings: the real source's row definition, measures, and freshness.\n\n"
         "Deferred: live data connectors, credentials, deployment, and further analyses.\n",
         encoding="utf-8",
@@ -86,6 +89,11 @@ def main() -> None:
         default="unknown",
     )
     parser.add_argument("--audience", default="City colleagues")
+    parser.add_argument(
+        "--banner",
+        action="store_true",
+        help="Include the bundled example banner after the user opts in.",
+    )
     args = parser.parse_args()
     try:
         destination = scaffold(
@@ -94,6 +102,7 @@ def main() -> None:
             sample=args.sample,
             future_source=args.future_source,
             audience=args.audience,
+            banner=args.banner,
         )
     except (ValueError, OSError) as error:
         parser.exit(1, f"App not created: {error}\n")

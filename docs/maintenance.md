@@ -1,6 +1,6 @@
 # Maintain and verify the kit
 
-The skill's `assets/starter` is the single source for new apps. Fix it there, run checks, then rebuild the ZIP. Existing generated apps are independent copies; they do not receive automatic upgrades. Version 0.4.0 intentionally has no shared-package upgrade service or MCP.
+The skill's `assets/starter` is the single source for new apps. Fix it there, run checks, then rebuild the ZIP. Existing generated apps are independent copies; they do not receive automatic upgrades. Version 0.5.0 intentionally has no shared-package upgrade service or MCP.
 
 ## Setup
 
@@ -23,7 +23,7 @@ Microsoft Edge must be installed for the browser checks. These development tools
 .venv/Scripts/python.exe -m ruff check skills tests scripts
 ```
 
-The package test suite also runs all 45 portable data, selection, visual-data, and startup tests from a freshly scaffolded app. To run those tests directly, use `python -m unittest discover -s tests -v` from the starter directory with the app's environment.
+The package test suite also runs all 47 portable data, selection, visual-data, and startup tests from a freshly scaffolded app. To run those tests directly, use `python -m unittest discover -s tests -v` from the starter directory with the app's environment.
 
 If the Codex Skill Creator validator is available, run it with Python's `-X utf8` flag on Windows. It validates the skill's frontmatter/shape, not actual model behavior.
 
@@ -47,4 +47,4 @@ The included visual guide is a snapshot of the source guide at kit creation. Upd
 python scripts/package.py
 ```
 
-The output is `dist/city-app-kit-0.4.0.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.
+The output is `dist/city-app-kit-0.5.0.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.

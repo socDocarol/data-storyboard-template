@@ -4,7 +4,7 @@
 
 City App Kit is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
-**v0.4.0 · Python Shiny · fictional sample-data edition**
+**v0.5.0 · Python Shiny · fictional sample-data edition**
 
 ![City App Kit overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
 
@@ -24,11 +24,11 @@ You need **Windows and Python 3.12**. No manual package-install steps are needed
 
 The first launch creates a local virtual environment, installs the app runtime, and opens the app in your browser. Later launches reuse that setup. The sample runs locally at a loopback address.
 
-Every included request, amount, duration, and place is fictional. The preview does not connect to City systems, use credentials, or call an in-app AI service.
+Every included data record is fictional. The optional City Hall photograph supplies visual context, not source data. The preview does not connect to City systems, use credentials, or call an in-app AI service.
 
 ## What you can explore
 
-The Home view leads with a prominent trend and puts supporting detail close by: ranked bars, status composition, a category-by-area heatmap, and selectable records. Drill from a category, area, status, or month to the records behind it. Explore adds search, filters, record details, and a matching CSV download. Compare places two groups side by side and aligns their monthly patterns. About explains definitions and limits.
+The desktop-first Home view uses a wide canvas up to 1,920 pixels, with an optional image banner and a prominent trend. Ranked bars, status composition, a category-by-area heatmap, and selectable records share the space. Drill from a category, area, status, or month to the records behind it. Explore adds search, filters, record details, and a matching CSV download. Compare places two groups side by side and aligns their monthly patterns. About explains definitions and limits.
 
 Selections stay with you as you move between views, refresh the page, or use browser Back and Forward. The preview also lets you switch between fictional service-request and spending examples, and show states such as missing, stale, empty, unavailable, and loading data.
 
@@ -41,6 +41,8 @@ Open this repository in a coding assistant that can read and edit files and run 
 > Read [skills/city-app-builder/SKILL.md](skills/city-app-builder/SKILL.md) and use its bundled starter to help me build a City data app. Keep the conversation short: ask only the questions needed for a useful first version, up to three by default. Start with fictional data and create my app in a new folder. I want to help **[audience]** understand **[main question]**.
 
 For example, add: “Managers need to see which service-request types are increasing.” Your assistant should use answers you have already given, propose sensible defaults, and create a separate app. Real data can be planned later; this release does not ask for database credentials or inspect live sources.
+
+The assistant asks once whether you want a banner: **use the example image**, **provide your own**, or **no banner**. That choice is part of the three-question budget. The demo shows the image option; new apps start without one unless you opt in. If your image is not ready, the assistant builds the preview and records it as pending.
 
 If your coding assistant supports installed skills, install the complete [city-app-builder](skills/city-app-builder/) folder using that assistant’s normal skill-installation process. Keep its scripts, references, and assets together. The prompt above also works when the skill stays in this repository.
 
@@ -66,6 +68,8 @@ python skills/city-app-builder/scripts/scaffold.py "C:/Projects/my-city-app" --t
 ```
 
 This creates a standalone copy only in a new folder. `--future-source` records the intended source; it does not create a connection. Available choices are `unknown`, `file`, `sql-server`, `api`, and `sacramento-open-data`. Open the new folder and run `python start.py`.
+
+Add `--banner` to include the bundled image after choosing it. To use your own image, copy it into the new app's `www/assets` and set its `banner` image path, alt text, and credit in `app_config.json`. Set `banner` to `null` for the layout without an image. See the [build reference](skills/city-app-builder/references/building.md) for the exact format.
 
 ## Current scope
 

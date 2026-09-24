@@ -22,6 +22,8 @@ Help a colleague describe a useful data application, preview it with explicitly 
 
 Three-question discovery target; one main question per turn; skip known answers. Supported future source choices are files, SQL Server, APIs, Sacramento Open Data, and unknown. This release uses bundled samples only, with no credentials, connectors, built-in model service, hosting, or deployment.
 
+Most users work on desktops. Use the available horizontal space for connected visuals, while retaining mobile reflow. Reserve one discovery question for optional banner imagery: use the example, provide an image, or no banner. If an image is pending, continue with the plain introduction.
+
 ## Brand Commitments
 
 Inherit the City data web application guide and unaltered City signature. Keep shared shell geometry, local Inter/Josefin Sans fonts, keyboard access, Home/About destinations, and truthful data states. The guide's pinned design rules govern the starter.

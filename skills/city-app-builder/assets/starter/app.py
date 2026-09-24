@@ -19,6 +19,7 @@ from city_app.components import (
     comparison_chart,
     disclosure,
     drill_breadcrumbs,
+    page_intro,
     record_panel,
     sample_banner,
     select_control,
@@ -94,6 +95,33 @@ def read_config(path: Path) -> dict:
         raise ValueError(
             "app_config.json: show_preview_controls must be true or false."
         )
+    config.setdefault("banner", None)
+    banner = config["banner"]
+    if banner is not None:
+        if (
+            not isinstance(banner, dict)
+            or any(
+                not isinstance(banner.get(key), str) or not banner[key].strip()
+                for key in ("image", "alt")
+            )
+            or not isinstance(banner.get("credit", ""), str)
+        ):
+            raise ValueError(
+                "app_config.json: banner must be null or an object with image, alt, and optional credit text."
+            )
+        asset_root = (ROOT / "www").resolve()
+        asset = (asset_root / banner["image"]).resolve()
+        if (
+            urlsplit(banner["image"]).scheme
+            or banner["image"].startswith(("/", "\\"))
+            or not asset.is_relative_to(asset_root)
+            or asset.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp")
+            or not asset.is_file()
+        ):
+            raise ValueError(
+                "app_config.json: banner image must be an existing local JPG, PNG, or WebP file inside www."
+            )
+        config["banner"] = {**banner, "image": asset.relative_to(asset_root).as_posix()}
     return config
 
 
@@ -121,13 +149,9 @@ def preview_controls():
     )
 
 
-def page(route: str, heading: str, lede, *outputs, hidden: bool = True):
+def page(route: str, heading: str, lede, *outputs, hidden: bool = True, banner=None):
     return ui.tags.section(
-        ui.div(
-            ui.h1(heading, tabindex="-1"),
-            ui.p(lede, class_="lede"),
-            class_="page-intro",
-        ),
+        page_intro(heading, lede, banner),
         *outputs,
         id=f"page-{route}",
         data_route=route,
@@ -154,6 +178,7 @@ app_ui = ui.page_fluid(
                 ui.output_text("introduction", inline=True),
                 ui.output_ui("overview"),
                 hidden=False,
+                banner=CONFIG["banner"],
             ),
             page(
                 "explore",
@@ -387,9 +412,9 @@ def server(input: Inputs, output: Outputs, session: Session):
                     {label: state.href("home", status=label) for label, _ in statuses},
                     label=source.label("status"),
                 ),
+                record_plot(rows, source, state),
                 class_="visual-secondary",
             ),
-            record_plot(rows, source, state),
             ui.tags.details(
                 ui.tags.summary("Insights and definitions for this selection"),
                 ui.p(

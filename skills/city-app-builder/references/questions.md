@@ -1,12 +1,13 @@
 # Small question bank
 
-Choose the next missing decision, not the next item in a mandatory questionnaire. Default to source, purpose, and audience. If a question is already answered, skip it. Detail/interaction questions replace a discovery question when that decision matters more; they do not automatically add another turn.
+Choose the next missing decision, not the next item in a mandatory questionnaire. Default to source, purpose, then the optional banner. Infer audience from known context or default to City colleagues unless it materially changes language or detail. If a question is already answered, skip it. Detail/interaction questions replace a discovery question when that decision matters more; they do not automatically add another turn.
 
 | ID | Ask when | Stable question | Small permitted adaptation | Useful choices |
 | --- | --- | --- | --- | --- |
 | source | Intended source is unknown | Where does your data live? | None needed | File; SQL Server; API; Sacramento Open Data; not sure |
 | purpose | The main job is unclear | What should this help people understand or do? | Substitute observed date/category/area fields in the choices | See changes over time; compare groups; find individual records |
 | audience | Audience will change language or detail | Who will use this most? | Use roles named by the person; otherwise use broad roles | Managers; staff doing the work; a wider audience |
+| banner | Source and purpose are known, and no preference was supplied | Would you like a banner image above the overview? | Name a supplied image or the civic subject when known | Use example image; I'll provide an image; No banner |
 | comparison | The requested comparison is genuinely ambiguous | Which comparison matters most? | Substitute real observed field labels | Over time; by category; by area |
 | detail | Summary-only versus record lookup changes the first view | Do people mainly need a summary or individual records? | Use the known row noun: requests, entries, applications | Summary; look up records; both |
 | meaning | An uncertain business definition would mislead | What does [term] mean in your team's work? | Quote the exact ambiguous term | Their definition; omit this measure for now |
@@ -19,7 +20,7 @@ Person: “Our requests are in SQL Server. Managers want to see which types are 
 
 Response: “We can build that first view using fictional service-request records. I haven't connected to your database. I'll start with request counts over time, a category comparison, and a searchable list; your database connection comes later.”
 
-The source, audience, and purpose are already given. Ask no discovery questions. Record that the real schema and status definitions are unverified. If building was authorized, scaffold the services example and adapt the brief and descriptions. Do not imply that renaming fictional categories makes the records real.
+The source, purpose, and manager audience are already given; reuse all three. Ask one banner question: “Would you like a banner image above the overview: Use example image, I'll provide an image, or No banner?” Record that the real schema and status definitions are unverified. If building was authorized, scaffold the services example and adapt the brief and descriptions. Do not imply that renaming fictional categories makes the records real.
 
 ## Example: a supplied sample
 
@@ -47,6 +48,7 @@ Confirmed: ...
 Defaults: ...
 Unresolved meanings: ... / none that block this fictional preview
 First version: Home, Explore, About using ... sample
+Banner: no banner / example image / pending supplied image; alt and credit when enabled
 Deferred: live connectors, credentials, deployment, ...
 
 Keep this under about 200 words. Report observations and suggestions separately.

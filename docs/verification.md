@@ -34,6 +34,15 @@ Boundaries above still apply. No connector was added; the provider registry, lab
 - **Passed:** 45 portable tests through a fresh scaffold, 6 package tests, the existing complete browser check, the focused browser regression script, and Ruff lint/format checks.
 - These checks use local fictional fixtures only. No live connector, deployment, or credential handling was added.
 
+## Desktop layout and optional banner verified (2026-09-24)
+
+- **47 portable tests and 7 package tests passed**, including the plain introduction, accessible banner markup, local-image configuration validation, opt-in scaffolding, and inclusion of the JPEG in the distribution.
+- **Browser check passed:** the City Hall photo loads with attribution; all five visual families and existing drilldowns remain functional. At 1440px and 2048px, the content uses at least 90% of the viewport and the three supporting visuals share a row. Tablet, phone, and 320px layouts have no page overflow; keyboard, history, filtered downloads, and the six data conditions still pass.
+- Desktop and phone screenshots were inspected. Heatmap columns were adjusted to accommodate full words, and the affected browser checks passed afterward.
+- The builder's banner choice is within the three-question conversation budget. New scaffolds omit the banner unless explicitly requested with `--banner`; missing user-supplied images do not block a preview.
+- Ruff lint/format and the skill validator passed. The visual detector's only finding was Inter, retained because it is required by the City guide.
+- City Hall photography is inherited unchanged from Budget Atlas as contextual imagery; asset attribution and the inherited usage boundary are recorded in the starter's asset notes. No live connection was added.
+
 ## Boundaries
 
 - The question bank and conversation cases were reviewed against the requested workflow. No independent smaller-model trial has been performed, and no model-performance improvement is claimed yet.

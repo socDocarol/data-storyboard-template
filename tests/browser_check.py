@@ -78,6 +78,13 @@ def run():
             page.goto(url)
             expect(page.locator(".stat-value").first).to_have_text("48")
             expect(page.locator(".stat-value").nth(1)).to_have_text("9.4 days")
+            expect(page.locator(".hero-image")).to_be_visible()
+            assert page.locator(".hero-image").evaluate(
+                "image => image.complete && image.naturalWidth > 0"
+            )
+            expect(page.locator(".hero-scene figcaption")).to_contain_text(
+                "City of Sacramento"
+            )
             page.locator(".chart-values summary").first.click()
             expect(page.locator(".chart-values table").first).to_be_visible()
             page.locator(".chart-values summary").first.click()
@@ -293,6 +300,14 @@ def run():
                     """() => { const header = document.querySelector('.city-header').getBoundingClientRect(); const brand = document.querySelector('.city-brand-link').getBoundingClientRect(); return {overflow:document.documentElement.scrollWidth > innerWidth, height:header.height, center:(brand.left+brand.right)/2, width:innerWidth, main:document.querySelectorAll('main').length, visibleH1:[...document.querySelectorAll('h1')].filter(e=>e.getClientRects().length).length}; }"""
                 )
                 assert not geometry["overflow"], (width, geometry)
+                if width >= 1280:
+                    container = page.locator(".city-container").bounding_box()
+                    assert container["width"] >= width * 0.9, (width, container)
+                    heatmap = page.locator("#heatmap").bounding_box()
+                    composition = page.locator("#composition").bounding_box()
+                    record_plot = page.locator("#record-plot").bounding_box()
+                    assert abs(heatmap["y"] - composition["y"]) < 2
+                    assert abs(heatmap["y"] - record_plot["y"]) < 2
                 assert geometry["height"] == (60 if width < 768 else 64), (
                     width,
                     geometry,

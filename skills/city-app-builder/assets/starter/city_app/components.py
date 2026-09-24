@@ -163,6 +163,40 @@ def sample_banner(source: SourceInfo):
     )
 
 
+def page_intro(title: str, description, banner: dict | None = None):
+    """Optional local image sets the scene; headings and data stay real text."""
+    content = ui.div(
+        ui.h1(title, tabindex="-1"),
+        ui.p(description, class_="lede"),
+        ui.p(
+            "Select a visual. Follow the story into the records.", class_="hero-prompt"
+        )
+        if banner
+        else None,
+        class_="intro-copy",
+    )
+    if not banner:
+        return ui.div(content, class_="page-intro")
+    return ui.div(
+        content,
+        ui.tags.figure(
+            ui.img(
+                src=banner["image"],
+                alt=banner["alt"],
+                width="540",
+                height="325",
+                class_="hero-image",
+                fetchpriority="high",
+            ),
+            ui.tags.figcaption(banner.get("credit", ""))
+            if banner.get("credit")
+            else None,
+            class_="hero-scene",
+        ),
+        class_="page-intro image-intro",
+    )
+
+
 def stat_card(label: str, value: str, detail: str):
     return ui.div(
         ui.h2(label),

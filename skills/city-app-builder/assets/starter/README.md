@@ -26,6 +26,10 @@ Your selections persist across views and in bookmarks, refresh, and browser hist
 
 Loading and error previews are simulations. Choose **Available data** to return to the working example.
 
+## Optional image banner
+
+The overview uses a wide desktop canvas, with supporting charts side by side. A banner image is optional: set `banner` in [app_config.json](app_config.json) to `null` for the plain introduction, or use an object with `image`, `alt`, and `credit` strings. The image path is relative to `www`, such as `assets/historic-city-hall.jpg`; local JPG, JPEG, PNG, and WebP files are supported. Keep any replacement image in `www/assets` and describe and credit it honestly. [ASSETS.md](ASSETS.md) records the example photograph's origin and usage boundary.
+
 ## Ask your AI for a change
 
 > Read AGENTS.md and APP-BRIEF.md if present. Make this app more useful for [audience] by [change]. Keep the data clearly fictional and preserve the City shell.

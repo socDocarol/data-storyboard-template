@@ -5,6 +5,7 @@ Read the user's request, `APP-BRIEF.md` if present, `app_config.json`, and the r
 ## Editing map
 
 - `app_config.json`: title, introduction, audience, default sample, portal URL, preview controls.
+- `app_config.json` `banner`: null for the plain introduction, or local image path (relative to `www`), meaningful alt text, and an honest credit. Ask the person once whether they want the example image, their own, or no banner; keep that choice inside the three-question discovery budget. Continue without imagery if their supplied image is pending.
 - `app.py`: page composition, reactive wiring, table row cap.
 - `city_app/components.py`: shared shell, metrics, linked charts, breadcrumbs, selection chips, comparisons, record details, state panels, and `disclosure()` (every sample/live sentence).
 - `city_app/state.py`: one shared selection, encoded links, drill hierarchy, and comparison calculations.
