@@ -4,7 +4,7 @@
 
 Data Storyboard Template is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
-**v0.6.0 · Python Shiny · samples and opt-in data connectors**
+**v0.6.1 · Python Shiny · samples and opt-in data connectors**
 
 ## Create your own app
 
@@ -16,11 +16,13 @@ https://github.com/socDocarol/data-storyboard-template
 
 Before asking questions or writing code, read the repository's README.md and AGENTS.md, then follow skills/city-app-builder/SKILL.md.
 
-Guide me through the template's short discovery process. Reuse anything I have already told you, ask only the missing questions one at a time, and aim for no more than three. Recommend sensible defaults instead of asking me to make technical decisions.
+Treat this as a new, isolated app. Reuse only the requirements I have given for this app. Do not use an earlier app's files, data, decisions, or running preview unless I explicitly ask you to.
 
-Once the essentials are clear, create my app in a new folder using the bundled starter. Adapt it to my purpose, preserve the template and existing apps, and begin with clearly labeled sample data.
+Before building, help me clarify what the app should answer, which data and measures matter, and which dashboard views and drilldowns I need. Ask missing questions one at a time, with useful recommendations. Keep discovery short, but do not skip essentials to meet a question count. Save banner and other cosmetic choices until the scope is clear.
 
-Build and run a working local preview, check its main views and interactions, and explain exactly how I can open it and what is still sample data. Keep your explanations short and practical.
+Summarize the agreed scope and any unconfirmed assumptions. Once the essentials are clear, create my app in a new folder inside this workspace using the bundled starter. Adapt the data and dashboard views to that scope, preserve existing apps, and begin with clearly labeled sample data. Do not present an unchanged starter with a new title as a tailored app.
+
+Launch with the generated app's start.py, use its printed URL, and verify the page belongs to the new app before checking its views and interactions. Explain exactly how I can open it and what is still sample data. Keep explanations short and practical.
 ```
 
 Your assistant will ask a few short questions and create your app in a new folder using clearly labeled sample data. When ready to connect data, put CSV/XLSX in the app's **Data** folder, or provide an HTTP API or Sacramento Open Data dataset link. Other local formats need a short choice about conversion or a specific reader.

@@ -4,6 +4,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.request import urlopen
 from unittest.mock import patch
 from pathlib import Path
 
@@ -21,6 +24,64 @@ def module(name):
 
 
 class PackageTests(unittest.TestCase):
+    def test_new_preview_uses_its_own_server_when_preferred_port_is_occupied(self):
+        class ExistingApp(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"<title>Previous budget app</title>")
+
+            def log_message(self, *args):
+                pass
+
+        previous = ThreadingHTTPServer(("127.0.0.1", 0), ExistingApp)
+        thread = threading.Thread(target=previous.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with tempfile.TemporaryDirectory() as temporary:
+                destination = module("scaffold").scaffold(
+                    Path(temporary) / "New isolated budget app",
+                    title="New isolated budget app",
+                    sample="spending",
+                    future_source="unknown",
+                )
+                script = """
+import sys
+from pathlib import Path
+from urllib.request import urlopen
+from start import start_server, stop_server
+
+process, url = start_server(Path(sys.executable), Path.cwd(), preferred_port=int(sys.argv[1]))
+try:
+    assert not url.endswith(':' + sys.argv[1]), url
+    with urlopen(url, timeout=5) as response:
+        body = response.read().decode('utf-8')
+    assert '<title>New isolated budget app</title>' in body
+    assert 'storyboard-preview-id' in body
+    assert process.poll() is None
+    print('Verified separate preview:', url)
+finally:
+    stop_server(process)
+"""
+                result = subprocess.run(
+                    [sys.executable, "-c", script, str(previous.server_port)],
+                    cwd=destination,
+                    capture_output=True,
+                    text=True,
+                    timeout=40,
+                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                )
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("Verified separate preview:", result.stdout)
+                with urlopen(
+                    f"http://127.0.0.1:{previous.server_port}", timeout=2
+                ) as response:
+                    self.assertIn(b"Previous budget app", response.read())
+        finally:
+            previous.shutdown()
+            previous.server_close()
+            thread.join(timeout=2)
+
     def test_private_inputs_and_active_config_are_not_scaffolded_or_packaged(self):
         create = module("scaffold")
         with tempfile.TemporaryDirectory() as temporary:

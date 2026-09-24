@@ -1,4 +1,4 @@
-"""Run with `python -m shiny run --host 127.0.0.1 --port 8126 app.py`.
+"""Launch with `python start.py --no-browser` and use its verified printed URL.
 
 Page composition and reactive wiring only. Data shape and providers live in
 city_app/data.py, selection in city_app/state.py, presentation in
@@ -8,6 +8,7 @@ city_app/components.py and city_app/visuals.py.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import replace
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -165,6 +166,10 @@ def page(route: str, heading: str, lede, *outputs, hidden: bool = True, banner=N
 
 app_ui = ui.page_fluid(
     ui.tags.head(
+        ui.tags.meta(
+            name="storyboard-preview-id",
+            content=os.environ.get("STORYBOARD_PREVIEW_ID", ""),
+        ),
         ui.tags.meta(name="robots", content="noindex, nofollow"),
         ui.tags.link(rel="stylesheet", href="city.css"),
         ui.tags.script(src="shell.js", defer=True),

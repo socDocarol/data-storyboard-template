@@ -1,7 +1,7 @@
 # Data connector implementation plan
 
 Build on handoff `4d3f2e8`. Preserve dashboard composition, shared drilldowns,
-source disclosures, and the three-question discovery target. SacMarina SQL
+source disclosures, and a short discovery flow that covers essential data and dashboard scope. SacMarina SQL
 work is outside this repository change.
 
 - [x] Add bounded CSV/XLSX loading from `Data`, explicit field mapping, source

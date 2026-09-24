@@ -141,3 +141,34 @@ Reproduction commands and packaging instructions are in [maintenance.md](mainten
   database. Views/external targets remain DBA-approved trust boundaries. A true
   database-enforced guarantee requires IT-confirmed SELECT-only access or a
   read-only reporting database/endpoint. No database or permissions were changed.
+
+## New-app scope and preview isolation (0.6.1, 2026-09-24)
+
+- Reviewed the two budget-template test sessions. They created separate app
+  folders, but the discovery flow treated a broad budget topic/source plus a
+  banner choice as sufficient. The completed test used a fixed-port manual
+  launch. The live page later identified itself as Approved Budget Explorer;
+  the available evidence does not prove prior budget-app content was reused or
+  that the wrong app was actually served during that test.
+- Replaced the rigid question cap/banner reservation with required coverage of
+  purpose, important data/measures and period, business dashboard views, and a
+  concrete first-version task. Decisions from other apps are not inherited.
+  Starter briefs now explicitly mark scope as unfinished instead of presenting
+  generic sample pages as agreed requirements. Complete briefs proceed without
+  repetitive discovery or another approval gate.
+- Removed the documented fixed-port manual launch. The launcher assigns each
+  child a fresh preview identity and prints/opens its URL only after the server
+  returns that identity. It detects a dead child or unrelated HTTP 200 response
+  and cleans up only its own child. Other running apps stay untouched.
+- **9 package tests passed**, including a real new Shiny server started with an
+  occupied preferred port and verification that both old and new servers served
+  their own pages. The suite runs **84 portable tests** from a fresh scaffold,
+  including occupied-port fallback, instance matching, dead-child rejection,
+  and startup-failure cleanup. Ruff and the skill shape validator passed.
+- A separate agent performed a bounded four-case discovery simulation against
+  the updated skill. Vague/partial budget requests remained in discovery;
+  complete requirements proceeded to build; preview steps used the printed URL
+  and verified the new app. This is a focused behavioral check, not a benchmark
+  or a guarantee of compliance by every assistant/model.
+- Existing budget/test apps, their data, and their running processes were not
+  modified. No SQL Server access or SacMarina changes were involved.

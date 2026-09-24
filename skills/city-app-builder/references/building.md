@@ -8,7 +8,7 @@ All paths here are relative to the skill folder. Keep the package outside a note
 python scripts/scaffold.py "C:/Projects/my-city-app" --title "Service Explorer" --sample services --future-source sql-server --banner
 ```
 
-The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes a short `APP-BRIEF.md`; update that brief with the actual conversation. Supported sample names: services, spending. Every scaffold includes `Data`, `connect.py`, `CONNECTORS.md`, and examples. Once source use is requested and meanings are clear, follow [the connector guide](../assets/starter/CONNECTORS.md); the normal scaffold remains sample-first. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only. The default is no banner; use `--banner` only after the person chooses the bundled example image.
+Establish the current app's purpose, important data/measures, period, and required dashboard views before scaffolding. Reuse only requirements given for this app. The destination must be a new folder inside the current workspace or another explicitly selected location; do not use or inspect a sibling/previous app as a shortcut. The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes an unscoped draft `APP-BRIEF.md`; replace that draft with this app's agreed requirements and defaults. A generated brief or four starter page names does not establish that discovery happened. Supported sample names: services, spending. Every scaffold includes `Data`, `connect.py`, `CONNECTORS.md`, and examples. Once source use is requested and meanings are clear, follow [the connector guide](../assets/starter/CONNECTORS.md); the normal scaffold remains sample-first. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only. The default is no banner; use `--banner` only after the person chooses the bundled example image.
 
 `app_config.json` controls the banner. Use `"banner": null` for no banner, or a local asset object such as:
 
@@ -24,13 +24,19 @@ The image path is relative to the starter `www` directory and must point to an e
 
 The generated app runs with `python start.py`, or by opening `Start app.cmd` on Windows with Python 3.12 installed. First launch installs the pinned runtime into that app's own `.venv`; subsequent launches reuse it. The launcher opens a local browser and keeps its terminal running. Stop with Ctrl+C. Never install packages in the user's notes vault.
 
-For manual setup:
+For an agent-run preview, use the same launcher without opening a browser automatically:
 
 ```powershell
-py -3.12 -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements-lock.txt
-.venv/Scripts/python.exe -m shiny run --host 127.0.0.1 --port 8126 app.py
+python start.py --no-browser
 ```
+
+Run from the new app folder. Open only the exact URL the launcher prints after
+verifying its own server instance. The launcher reports the absolute app folder
+and chooses another port if its preferred one is occupied. Never substitute a
+remembered localhost address, bypass it with a fixed-port Shiny command, or stop
+another app to free a port. A startup error is not a successful preview. Check
+the new app's title and source/sample status, then exercise the agreed business
+views and acceptance task before handing it off.
 
 ## Editing map
 

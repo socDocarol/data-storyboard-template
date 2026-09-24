@@ -46,12 +46,16 @@ The data interface is in [city_app/data.py](city_app/data.py). It represents pre
 
 Then open the app and check the affected interaction at desktop and phone widths. The unit tests check data correctness, filtering, missing values, credits, and safe exports; they do not prove a layout works or establish full accessibility conformance.
 
-## Manual startup
+## Agent-run preview
 
 ```powershell
-py -3.12 -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements-lock.txt
-.venv/Scripts/python.exe -m shiny run --host 127.0.0.1 --port 8126 app.py
+python start.py --no-browser
 ```
 
-Open `http://127.0.0.1:8126`. See [ASSETS.md](ASSETS.md) for artwork and font provenance. This starter is a local internal preview, with no authentication, public hosting, or publishing workflow.
+Use the app folder and exact URL printed by this launcher. It verifies the newly
+started server before printing the URL, so another app at a familiar localhost
+address cannot silently become this preview. Confirm the page title and source
+match this app. Do not launch with a fixed-port command or stop an unrelated app.
+
+See [ASSETS.md](ASSETS.md) for artwork and font provenance. This starter is a local
+internal preview, with no authentication, public hosting, or publishing workflow.

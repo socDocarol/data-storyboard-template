@@ -34,7 +34,7 @@ Maps, treemaps, histograms, calendar grids, target/bullet charts, and forecastin
 | Find and inspect something | Search + categorical/month filters + sortable record table + drawer + matching CSV | Newest records first |
 | Move from a summary to an explanation | Breadcrumbs + removable selections + source/definition notes | Retain context across pages and in the URL |
 
-Recommend the recipe from the existing purpose and inspected fields. Keep the skill's three-question discovery budget; do not ask separately about every chart, filter, drill level, and interaction. If the person has not supplied verified field meanings, use the named fictional example and record tentative mappings in the brief.
+Recommend the recipe from the existing purpose and inspected fields. Establish the user's required business views and drilldowns first, then choose technical/chart details without a separate question for every control. Keep discovery focused without skipping essential data or dashboard requirements. If the person has not supplied verified field meanings, use the named fictional example and record tentative mappings in the brief.
 
 ## Working component catalog
 

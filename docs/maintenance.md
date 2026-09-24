@@ -1,6 +1,6 @@
 # Maintain and verify the kit
 
-The skill's `assets/starter` is the single source for new apps. Fix it there, run checks, then rebuild the ZIP. Existing generated apps are independent copies; they do not receive automatic upgrades. Version 0.6.0 intentionally has no shared-package upgrade service or MCP.
+The skill's `assets/starter` is the single source for new apps. Fix it there, run checks, then rebuild the ZIP. Existing generated apps are independent copies; they do not receive automatic upgrades. Version 0.6.1 intentionally has no shared-package upgrade service or MCP.
 
 ## Setup
 
@@ -23,6 +23,8 @@ Microsoft Edge must be installed for the browser checks. These development tools
 .venv/Scripts/python.exe tests/browser_connectors.py
 .venv/Scripts/python.exe -m ruff check skills tests scripts
 ```
+
+The package suite also launches a freshly scaffolded app while another HTTP server owns its preferred port, verifies the new instance identity/title, and confirms the original server still responds.
 
 The package test suite also runs the portable data, connector, selection, visual-data, and startup tests from a freshly scaffolded app. To run those tests directly, use `python -m unittest discover -s tests -v` from the starter directory with the app's environment.
 
@@ -48,4 +50,4 @@ The included visual guide is a snapshot of the source guide at kit creation. Upd
 python scripts/package.py
 ```
 
-The output is `dist/data-storyboard-template-0.6.0.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, private Data contents, active data_source.json, and environment files, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.
+The output is `dist/data-storyboard-template-0.6.1.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, private Data contents, active data_source.json, and environment files, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.
