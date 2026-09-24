@@ -1,14 +1,26 @@
 # Data Storyboard Template
 
-**Turn a question about City work into a visual, local data app—with a short conversation in your coding assistant.**
+**Turn a question about City work into a visual, local data app with a short conversation in your coding assistant.**
 
 Data Storyboard Template is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
 **v0.5.3 · Python Shiny · fictional sample-data edition**
 
+## Create your own app
+
+Copy this message into a coding assistant that has access to this repository:
+
+```text
+Help me make a data web app from this template: https://github.com/socDocarol/data-storyboard-template
+```
+
+Your assistant will ask a few short questions and create your app in a new folder using clearly labeled sample data.
+
+**Coding agent: start here.** Read [AGENTS.md](AGENTS.md), then follow [the City App Builder instructions](skills/city-app-builder/SKILL.md) before asking discovery questions or building. Use the bundled starter and its existing workflow for the user's app.
+
 ![Data Storyboard Template overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
 
-## Start here: preview the sample
+## Optional: preview the sample yourself
 
 You need **Windows and Python 3.12**. No manual package-install steps are needed.
 
@@ -35,18 +47,6 @@ Selections stay with you as you move between views, refresh the page, or use bro
 Source notes and demo controls live behind the small **information icon** beside the introduction. Hover, focus, click, or tap it to reveal the details; open **Preview options** to switch examples. Escape or a click outside closes it. An amber icon flags data that needs attention.
 
 ![Record details drawer in the fictional service-request example](docs/images/record-details.png)
-
-## Build your own first version with an AI
-
-Open this repository in a coding assistant that can read and edit files and run Python. Then paste this prompt:
-
-> Read [skills/city-app-builder/SKILL.md](skills/city-app-builder/SKILL.md) and use its bundled starter to help me build a City data app. Keep the conversation short: ask only the questions needed for a useful first version, up to three by default. Start with fictional data and create my app in a new folder. I want to help **[audience]** understand **[main question]**.
-
-For example, add: “Managers need to see which service-request types are increasing.” Your assistant should use answers you have already given, propose sensible defaults, and create a separate app. Real data can be planned later; this release does not ask for database credentials or inspect live sources.
-
-The assistant asks once whether you want a banner: **use the example image**, **provide your own**, or **no banner**. That choice is part of the three-question budget. The demo shows the image option; new apps start without one unless you opt in. If your image is not ready, the assistant builds the preview and records it as pending.
-
-If your coding assistant supports installed skills, install the complete [city-app-builder](skills/city-app-builder/) folder using that assistant’s normal skill-installation process. Keep its scripts, references, and assets together. The prompt above also works when the skill stays in this repository.
 
 ## Reusable pieces
 

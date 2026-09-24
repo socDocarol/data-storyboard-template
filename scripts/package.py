@@ -21,6 +21,7 @@ EXCLUDE = {
 }
 ROOT_FILES = (
     "README.md",
+    "AGENTS.md",
     "PRODUCT.md",
     "DESIGN.md",
     "Preview sample.cmd",

@@ -2,6 +2,8 @@
 
 Read the user's request, `APP-BRIEF.md` if present, `app_config.json`, and the relevant source before changing anything. Preserve existing user edits. Keep ordinary changes small.
 
+Do not use em dashes in README files or other Markdown, including `APP-BRIEF.md`. Use commas, colons, parentheses, or separate sentences instead.
+
 ## Editing map
 
 - `app_config.json`: title, introduction, audience, default sample, portal URL, preview controls.
