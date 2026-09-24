@@ -1,0 +1,49 @@
+record_id,date,category,area,status,value
+EXP-01001,2026-01-01,Community programs,Central,Posted,15137
+EXP-01002,2026-01-04,Facilities maintenance and accessibility improvements,North,Posted,16947
+EXP-01003,2026-01-07,Operations,South,Posted,18757
+EXP-01004,2026-01-10,Community programs,East,Posted,20567
+EXP-01005,2026-01-13,Facilities maintenance and accessibility improvements,Central,Posted,22377
+EXP-01006,2026-01-16,Operations,North,Posted,24187
+EXP-01007,2026-01-19,Community programs,South,Posted,25997
+EXP-01008,2026-01-22,Facilities maintenance and accessibility improvements,East,Credit,-1250
+EXP-02001,2026-02-01,Facilities maintenance and accessibility improvements,Central,Posted,15274
+EXP-02002,2026-02-04,Operations,North,Posted,17084
+EXP-02003,2026-02-07,Community programs,South,Posted,18894
+EXP-02004,2026-02-10,Facilities maintenance and accessibility improvements,East,Posted,20704
+EXP-02005,2026-02-13,Operations,Central,Posted,22514
+EXP-02006,2026-02-16,Community programs,North,Posted,24324
+EXP-02007,2026-02-19,Facilities maintenance and accessibility improvements,South,Posted,26134
+EXP-02008,2026-02-22,Operations,East,Credit,-2500
+EXP-03001,2026-03-01,Operations,Central,Posted,15411
+EXP-03002,2026-03-04,Community programs,North,Posted,17221
+EXP-03003,2026-03-07,Facilities maintenance and accessibility improvements,South,Posted,19031
+EXP-03004,2026-03-10,Operations,East,Posted,20841
+EXP-03005,2026-03-13,Community programs,Central,Posted,22651
+EXP-03006,2026-03-16,Facilities maintenance and accessibility improvements,North,Posted,24461
+EXP-03007,2026-03-19,Operations,South,Posted,26271
+EXP-03008,2026-03-22,Community programs,East,Credit,-3750
+EXP-04001,2026-04-01,Community programs,Central,Posted,15548
+EXP-04002,2026-04-04,Facilities maintenance and accessibility improvements,North,Posted,17358
+EXP-04003,2026-04-07,Operations,South,Posted,19168
+EXP-04004,2026-04-10,Community programs,East,Posted,20978
+EXP-04005,2026-04-13,Facilities maintenance and accessibility improvements,Central,Posted,22788
+EXP-04006,2026-04-16,Operations,North,Posted,24598
+EXP-04007,2026-04-19,Community programs,South,Posted,26408
+EXP-04008,2026-04-22,Facilities maintenance and accessibility improvements,East,Credit,-5000
+EXP-05001,2026-05-01,Facilities maintenance and accessibility improvements,Central,Posted,15685
+EXP-05002,2026-05-04,Operations,North,Posted,17495
+EXP-05003,2026-05-07,Community programs,South,Posted,19305
+EXP-05004,2026-05-10,Facilities maintenance and accessibility improvements,East,Posted,21115
+EXP-05005,2026-05-13,Operations,Central,Posted,22925
+EXP-05006,2026-05-16,Community programs,North,Posted,24735
+EXP-05007,2026-05-19,Facilities maintenance and accessibility improvements,South,Posted,26545
+EXP-05008,2026-05-22,Operations,East,Credit,-6250
+EXP-06001,2026-06-01,Operations,Central,Posted,15822
+EXP-06002,2026-06-04,Community programs,North,Posted,17632
+EXP-06003,2026-06-07,Facilities maintenance and accessibility improvements,South,Posted,19442
+EXP-06004,2026-06-10,Operations,East,Posted,21252
+EXP-06005,2026-06-13,Community programs,Central,Posted,23062
+EXP-06006,2026-06-16,Facilities maintenance and accessibility improvements,North,Posted,24872
+EXP-06007,2026-06-19,Operations,South,Posted,26682
+EXP-06008,2026-06-22,Community programs,East,Credit,-7500

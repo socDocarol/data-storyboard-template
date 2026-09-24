@@ -1,0 +1,49 @@
+record_id,date,category,area,status,value
+REQ-01001,2026-01-01,Waste collection,Central,Open,
+REQ-01002,2026-01-04,Parks and trees,North,Completed,6
+REQ-01003,2026-01-07,Street maintenance,South,Completed,7
+REQ-01004,2026-01-10,Lighting,East,Completed,8
+REQ-01005,2026-01-13,Street maintenance,Central,Open,
+REQ-01006,2026-01-16,Waste collection,North,Completed,10
+REQ-01007,2026-01-19,Parks and trees,South,Completed,11
+REQ-01008,2026-01-22,Street maintenance,East,Completed,12
+REQ-02001,2026-02-01,Parks and trees,Central,Open,
+REQ-02002,2026-02-04,Street maintenance,North,Completed,9
+REQ-02003,2026-02-07,Lighting,South,Completed,10
+REQ-02004,2026-02-10,Street maintenance,East,Completed,11
+REQ-02005,2026-02-13,Waste collection,Central,Open,
+REQ-02006,2026-02-16,Parks and trees,North,Completed,13
+REQ-02007,2026-02-19,Street maintenance,South,Completed,14
+REQ-02008,2026-02-22,Lighting,East,Completed,15
+REQ-03001,2026-03-01,Street maintenance,Central,Open,
+REQ-03002,2026-03-04,Lighting,North,Completed,12
+REQ-03003,2026-03-07,Street maintenance,South,Completed,13
+REQ-03004,2026-03-10,Waste collection,East,Completed,14
+REQ-03005,2026-03-13,Parks and trees,Central,Open,
+REQ-03006,2026-03-16,Street maintenance,North,Completed,16
+REQ-03007,2026-03-19,Lighting,South,Completed,17
+REQ-03008,2026-03-22,Street maintenance,East,Completed,2
+REQ-04001,2026-04-01,Lighting,Central,Open,
+REQ-04002,2026-04-04,Street maintenance,North,Completed,15
+REQ-04003,2026-04-07,Waste collection,South,Completed,16
+REQ-04004,2026-04-10,Parks and trees,East,Completed,17
+REQ-04005,2026-04-13,Street maintenance,Central,Open,
+REQ-04006,2026-04-16,Lighting,North,Completed,3
+REQ-04007,2026-04-19,Street maintenance,South,Completed,4
+REQ-04008,2026-04-22,Waste collection,East,Completed,5
+REQ-05001,2026-05-01,Street maintenance,Central,Open,
+REQ-05002,2026-05-04,Waste collection,North,Completed,2
+REQ-05003,2026-05-07,Parks and trees,South,Completed,3
+REQ-05004,2026-05-10,Street maintenance,East,Completed,4
+REQ-05005,2026-05-13,Lighting,Central,Open,
+REQ-05006,2026-05-16,Street maintenance,North,Completed,6
+REQ-05007,2026-05-19,Waste collection,South,Completed,7
+REQ-05008,2026-05-22,Parks and trees,East,Completed,8
+REQ-06001,2026-06-01,Waste collection,Central,Open,
+REQ-06002,2026-06-04,Parks and trees,North,Completed,5
+REQ-06003,2026-06-07,Street maintenance,South,Completed,6
+REQ-06004,2026-06-10,Lighting,East,Completed,7
+REQ-06005,2026-06-13,Street maintenance,Central,Open,
+REQ-06006,2026-06-16,Waste collection,North,Completed,9
+REQ-06007,2026-06-19,Parks and trees,South,Completed,10
+REQ-06008,2026-06-22,Street maintenance,East,Completed,11

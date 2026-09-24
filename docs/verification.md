@@ -1,0 +1,46 @@
+# Verification record
+
+Date: 2026-09-21. Package version: 0.3.0. Tested on Windows, Python 3.12, Shiny 1.7.0, and headless Microsoft Edge through Playwright 1.58.0.
+
+## Passed
+
+- **29 portable data/selection/visual tests:** sample identity, explicit missing values, service mean and denominator, spending credits/net sum, zero-count months, combined filters, ordering, invalid/duplicate records, sample-labeled exports, spreadsheet-formula protection, selection scope, drill ancestor behavior, URL encoding, invalid state bounds, comparison means/denominators, missing/zero/negative baselines, aligned months, monthly measure reconciliation, gaps rather than zero, signed chart scales, all-missing plots, and escaped visual labels.
+- **6 package tests:** standalone scaffold and its portable test run, source preservation, refusal to overwrite existing folders or write inside the skill, input validation, bounded CSV/JSON profiling, no example-value echo, size limits, and rejection of network paths.
+- **Browser checks:** visual-first overview and five chart families; linked heatmap/status/record dots; keyboard chart-to-record flow; all-missing plot; Home/Explore/Compare/About; linked category/area/status and month drill; record drawer keyboard, Escape, return focus, refresh and history; comparison scope, exact table, and missing means; direct hashes and refresh; Back/Forward; matching filtered CSV and row order; reset/no-results behavior; both examples; all six data conditions; credits and ordering; exact-value chart tables; menu selection and Escape; skip link; reduced motion.
+- **Responsive geometry:** 2048, 1440, 800, 390, and 320 pixels; header heights and centered identity; one main landmark and one visible H1; long category labels; contained table scrolling; no horizontal page overflow.
+- **Runtime behavior:** no JavaScript errors and no external HTTP requests during the browser test. The optional Portal link was not followed.
+- **Fresh first launch (v0.1 runtime, unchanged dependencies in v0.2):** a newly scaffolded app installed its locked dependencies into its own virtual environment, served successfully, and passed all 15 portable tests using that new environment. The test server was stopped afterward.
+- **Skill shape and code quality:** Skill Creator's validator passed using UTF-8 mode on Windows; Ruff checks passed. The skill's CSV inspector was also run through its time-limited command entrypoint.
+- **Visual review:** desktop and phone layouts were inspected, including the new comparison page at 320 pixels and record-detail drawer. Shared selections and drill controls retain the City visual standard.
+
+The Impeccable detector flagged only the generic use of Inter in this visual pass. Inter is explicitly required by the inherited City guide, so it was retained. Mobile charts and heatmaps retain readable scales through contained horizontal scrolling, with a visible scroll hint and exact-value alternatives.
+
+## 0.4.0 refactor check (2026-09-21)
+
+Same environment as above. The starter was refactored for reliability and efficiency without changing its behavior; these are the checks actually run afterwards.
+
+- **44 portable tests** from the starter (was 29): the earlier cases plus one-pass filtering by status and month, month grouping across a year boundary, any-unit value formatting, cached sample immutability, live-source export labeling, source label validation, the provider registry, state-panel misuse, live-source state and status wording, the plot point cap, non-colliding group colors, source-labeled heatmaps and chips, startup config validation, and page composition.
+- **6 package tests**, unchanged, including the portable suite run inside a fresh scaffold.
+- **Browser check passed twice in a row** on the refactored starter. On the unmodified 0.3.0 code the same check failed once and passed once at the step where closing the record drawer returns focus to the originating table link: closing the drawer changed the shared state, which redrew the whole table and replaced the focused element. The server now keeps a record-free `selection` value that charts and tables depend on, so a drawer open or close redraws nothing else.
+- **Ruff** lint and format pass.
+
+Boundaries above still apply. No connector was added; the provider registry, label relabeling, disclosure switch, and row/point caps were exercised only by unit tests and the sample data.
+
+## Review fixes verified (2026-09-22)
+
+- Partial dimension label overrides now retain the default labels in the heatmap. An area-only `District` override renders Home successfully, and the new unit test also covers category-only, status-only, and empty overrides without mutating the supplied mapping.
+- The row-limit notice is separate from the mobile scroll hint. A synthetic 501-row dataset shows the 500-row limit at 1440px and 390px; its CSV contains all 501 records.
+- Banner and footer disclosures now render from the active dataset. Switching samples → a synthetic provider with `is_sample=False` → samples, and refreshing the nondefault source URL, preserves consistent banner/footer/table/download wording.
+- **Passed:** 45 portable tests through a fresh scaffold, 6 package tests, the existing complete browser check, the focused browser regression script, and Ruff lint/format checks.
+- These checks use local fictional fixtures only. No live connector, deployment, or credential handling was added.
+
+## Boundaries
+
+- The question bank and conversation cases were reviewed against the requested workflow. No independent smaller-model trial has been performed, and no model-performance improvement is claimed yet.
+- SQL Server, APIs, Sacramento Open Data, credentials, real-source interpretation, and deployment are not implemented or verified.
+- The local inspector describes a bounded CSV/JSON sample; it is not a data connector, importer, or whole-dataset audit.
+- Keyboard and responsive checks do not establish full accessibility conformance. A comprehensive accessibility audit, contrast-tool sweep, assistive-technology testing, and release review remain separate work.
+- Windows/Edge is the tested launch environment. Other operating systems and browsers have not been validated.
+- The included guide is a snapshot. Generated apps are independent copies and do not receive future kit fixes automatically.
+
+Reproduction commands and packaging instructions are in [maintenance.md](maintenance.md).
