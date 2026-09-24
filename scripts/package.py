@@ -18,6 +18,7 @@ EXCLUDE = {
     ".ruff_cache",
     "dist",
     ".git",
+    ".internal",
 }
 ROOT_FILES = (
     "README.md",
@@ -34,6 +35,15 @@ def product_files():
         yield ROOT / name
     for folder in ("skills", "docs", "tests", "scripts"):
         for directory, dirs, files in os.walk(ROOT / folder):
+            if Path(directory) == ROOT / "docs":
+                dirs[:] = [
+                    name for name in dirs if name not in ("plans", "superpowers")
+                ]
+                files = [
+                    name
+                    for name in files
+                    if name != "verification.md" and not name.endswith("-plan.md")
+                ]
             if Path(directory).name == "Data":
                 dirs[:] = []
                 files = [name for name in files if name in ("README.md", ".gitignore")]

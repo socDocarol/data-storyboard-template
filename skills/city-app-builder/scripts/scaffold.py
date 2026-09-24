@@ -26,6 +26,7 @@ def private_files(directory, names):
         ".pytest_cache",
         "*.log",
         ".qa",
+        ".internal",
         "data_source.json",
         ".env",
         ".env.*",

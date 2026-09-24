@@ -93,7 +93,7 @@ Add `--banner` to include the bundled image after choosing it. To use your own i
 
 Connectors use the existing dashboard and selections. Source errors and stale snapshots remain visible. Local data and active connection configuration are excluded from shared ZIPs. SQL Server uses Windows authentication and an existing table/view, reuses installed ODBC Driver 18 or 17, and has an offline prerequisite check. Mandatory guards reject unsafe SQL/configuration and writable or unverifiable permissions for the source; transactions are rolled back, never committed. IT-confirmed read-only access and live verification remain for the work computer.
 
-The kit was tested on Windows with Python 3.12 and Microsoft Edge. Read the [verification record](docs/verification.md) for the checks performed and their limits. Read [maintenance instructions](docs/maintenance.md) to verify or package the kit.
+The kit was tested on Windows with Python 3.12 and Microsoft Edge. Its checks cover prepared data, connector limits, linked interactions, filtered exports, and isolated preview startup. SQL Server tests use a simulated connection; actual work-computer verification remains pending. Read [maintenance instructions](docs/maintenance.md) to run the checks or package the kit.
 
 ## Assets and sharing
 

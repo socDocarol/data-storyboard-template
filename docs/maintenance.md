@@ -2,6 +2,8 @@
 
 The skill's `assets/starter` is the single source for new apps. Fix it there, run checks, then rebuild the ZIP. Existing generated apps are independent copies; they do not receive automatic upgrades. Version 0.6.1 intentionally has no shared-package upgrade service or MCP.
 
+Keep temporary plans, session journals, and handoff/QA notes in the ignored `.internal/` folder. They stay local and are excluded from scaffolds and ZIPs. Legacy plan/journal paths under `docs` are also excluded. Stable product guidance, reusable tests, and these maintenance instructions belong in the repository.
+
 ## Setup
 
 Use Python 3.12 from the kit root:

@@ -20,6 +20,8 @@ Edit this repository rather than starting the app-creation conversation. Read th
 
 Keep the README's copyable prompt and agent entry links working in both the repository and the ZIP distribution.
 
+Keep implementation plans, session journals, handoff notes, and ad hoc QA reports in the ignored `.internal/` folder. Do not commit or package them unless the user explicitly asks to publish them. Keep stable product/design guidance, source contracts, reusable tests, and maintenance instructions versioned. Report validation results in the conversation; do not grow a published session diary.
+
 ## Markdown style
 
 Do not use em dashes in README files or any other Markdown, including generated app briefs. Use a comma, colon, parentheses, or a separate sentence instead. Keep instructions direct and easy to scan.

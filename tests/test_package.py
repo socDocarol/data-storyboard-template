@@ -99,6 +99,22 @@ finally:
             (starter / "app_config.json").write_text(
                 (create.STARTER / "app_config.json").read_text()
             )
+            notes = [
+                root / ".internal/session.md",
+                root / "docs/.internal/qa.md",
+                root / "docs/connector-plan.md",
+                root / "docs/verification.md",
+                root / "docs/plans/next-step.md",
+                root / "docs/superpowers/plans/feature.md",
+                starter / ".internal/implementation.md",
+            ]
+            for note in notes:
+                note.parent.mkdir(parents=True, exist_ok=True)
+                note.write_text("Local working record")
+            (root / "docs/maintenance.md").write_text("Reusable maintenance guide")
+            (root / "docs/conversation-cases.md").write_text(
+                "Reusable acceptance cases"
+            )
             with patch.object(create, "STARTER", starter):
                 app = create.scaffold(
                     root / "app",
@@ -112,6 +128,7 @@ finally:
             )
             self.assertFalse((app / "data_source.json").exists())
             self.assertFalse((app / ".env.local").exists())
+            self.assertFalse((app / ".internal").exists())
             spec = importlib.util.spec_from_file_location(
                 "package_privacy", ROOT / "scripts/package.py"
             )
@@ -124,6 +141,11 @@ finally:
             self.assertNotIn(data / "nested/private.csv", files)
             self.assertNotIn(starter / "data_source.json", files)
             self.assertNotIn(starter / ".env.local", files)
+            self.assertIn(root / "docs/maintenance.md", files)
+            self.assertIn(root / "docs/conversation-cases.md", files)
+            for note in notes:
+                with self.subTest(note=note.relative_to(root)):
+                    self.assertNotIn(note, files)
 
     def test_scaffold_is_standalone_and_preserves_source(self):
         create = module("scaffold")

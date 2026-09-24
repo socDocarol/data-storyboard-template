@@ -9,3 +9,10 @@ dist/
 data_source.json
 .env
 .env.*
+
+# Local implementation plans and session work records.
+.internal/
+/docs/*-plan.md
+/docs/verification.md
+/docs/plans/
+/docs/superpowers/
