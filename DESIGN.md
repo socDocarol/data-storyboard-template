@@ -14,6 +14,8 @@ The guide's shell and component prescriptions take precedence over generic styli
 
 The user-requested desktop layout uses a 1,920px maximum canvas and 32px side gutters, replacing the former 1,120px limit. At 1280px and above, the supporting heatmap, status mix, and record plot share a row; smaller viewports reflow. An optional compact image banner pairs readable white text on cobalt with a local, credited photograph. The banner replaces the plain Home introduction, retains one H1, and keeps the primary charts near the first viewport. A `null` banner keeps the plain introduction.
 
+Keep the borderless overview KPIs in a compact, left-aligned group capped at 800px, rather than distributing them across the full desktop canvas. Hero copy, KPI text, and chart content share the same inner inset (20px desktop, 14px phone). Shared label/value/detail rows keep the values aligned when a label wraps.
+
 ## Visuals-first default
 
 Lead with a prominent chart and a purposeful mix of supporting visuals. Keep headline measures compact and instructions short. Put interpretation, definitions, full tables, and detailed explanations in drilldowns, expandable notes, and About. Preserve sample disclosures and meaningful data-quality warnings. The reusable visual library includes line/area trends, rankings, status composition, area/category heatmaps, record plots, and paired comparisons. Choose from the user’s purpose and verified field meanings without adding chart-selection questions. Maps require verified geography; targets require supplied definitions.

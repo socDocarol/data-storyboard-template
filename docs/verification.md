@@ -50,6 +50,10 @@ Boundaries above still apply. No connector was added; the provider registry, lab
 - The focused source/row-limit regression suite passed, including consistent disclosures through source switches and refresh. Closed-overview and expanded-panel screenshots were inspected.
 - The 47 portable tests, 7 package tests, Ruff, and skill validation passed. No dependencies or live connections were added.
 
+## KPI alignment verified (2026-09-24)
+
+The borderless KPI group now stays within 800px, uses the same left content inset as the hero and charts, and aligns values through wrapped labels. Focused browser checks passed for both datasets at 2048, 1440, 800, 620, 390, and 320px: content edges align within one pixel, KPI values share a row, and neither page nor values overflow. Desktop and phone screenshots were inspected; the layout detector reported no findings. This was a CSS-only refinement; calculation and data tests were not rerun.
+
 ## Boundaries
 
 - The question bank and conversation cases were reviewed against the requested workflow. No independent smaller-model trial has been performed, and no model-performance improvement is claimed yet.
