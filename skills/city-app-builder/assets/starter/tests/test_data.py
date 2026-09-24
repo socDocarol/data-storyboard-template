@@ -222,7 +222,7 @@ class DataTests(unittest.TestCase):
             load_dataset("production")
 
     def test_provider_registry_is_the_connector_seam(self):
-        self.assertEqual(set(PROVIDERS), {"services", "spending"})
+        self.assertTrue({"services", "spending"}.issubset(PROVIDERS))
         self.assertEqual(load_dataset("spending", "stale").state, "stale")
         self.assertIs(PROVIDERS["spending"].source, self.spending.source)
         live_source = replace(self.services.source, is_sample=False, name="Live")

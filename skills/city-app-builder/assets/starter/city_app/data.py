@@ -113,6 +113,8 @@ class Dataset:
     records: tuple[Record, ...]
     source: SourceInfo
     state: DataState = "ready"
+    message: str = ""
+    is_preview: bool = False
 
     def __post_init__(self) -> None:
         if self.state not in STATES:
@@ -176,14 +178,14 @@ def load_sample(name: str = "services", state: DataState = "ready") -> Dataset:
     if state not in STATES:
         raise ValueError("Choose a supported preview condition.")
     if state in UNAVAILABLE_STATES:
-        return Dataset((), SOURCES[name], state)
+        return Dataset((), SOURCES[name], state, is_preview=True)
     records = _read_sample(name)
     if state == "missing":
         records = tuple(
             replace(row, value=None, area=MISSING_LABEL) if index % 4 == 0 else row
             for index, row in enumerate(records)
         )
-    return Dataset(records, SOURCES[name], state)
+    return Dataset(records, SOURCES[name], state, is_preview=True)
 
 
 # --- Provider registry: the connector seam --------------------------------------
@@ -352,7 +354,7 @@ def export_csv(records: tuple[Record, ...], source: SourceInfo) -> str:
                 row.date.isoformat(),
                 *[_safe_text(getattr(row, key)) for key in DIMENSIONS],
                 row.value if row.value is not None else "",
-                source.value_unit,
+                _safe_text(source.value_unit),
             )
         )
     return stream.getvalue()

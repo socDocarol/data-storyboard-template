@@ -8,7 +8,7 @@ All paths here are relative to the skill folder. Keep the package outside a note
 python scripts/scaffold.py "C:/Projects/my-city-app" --title "Service Explorer" --sample services --future-source sql-server --banner
 ```
 
-The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes a short `APP-BRIEF.md`; update that brief with the actual conversation. Supported sample names: services, spending. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only. The default is no banner; use `--banner` only after the person chooses the bundled example image.
+The destination must not exist. The script refuses to overwrite an app or write inside its own starter. It copies the complete starter and writes a short `APP-BRIEF.md`; update that brief with the actual conversation. Supported sample names: services, spending. Every scaffold includes `Data`, `connect.py`, `CONNECTORS.md`, and examples. Once source use is requested and meanings are clear, follow [the connector guide](../assets/starter/CONNECTORS.md); the normal scaffold remains sample-first. Future-source choices: unknown, file, sql-server, api, sacramento-open-data. This flag records intent only. The default is no banner; use `--banner` only after the person chooses the bundled example image.
 
 `app_config.json` controls the banner. Use `"banner": null` for no banner, or a local asset object such as:
 
@@ -44,6 +44,8 @@ py -3.12 -m venv .venv
 | Line/area trends, composition ring, heatmaps, record plots, plot point cap (`MAX_PLOT_POINTS`) | `city_app/visuals.py` |
 | Display labels for category/area/status (relabel, never rename) | `SourceInfo.labels` in `city_app/data.py` |
 | Sample rows | `samples/services.csv`, `samples/spending.csv` |
+| Private local inputs | `Data/`, excluded from scaffolds/ZIPs |
+| Source configuration and adapters | `connect.py`, private `data_source.json`, `city_app/sources/` |
 | City geometry, tokens, responsive behavior | `www/city.css` |
 | Bookmarkable selection, control bindings, record dialog, focus, menu, sticky behavior | `www/shell.js` |
 | Findings and user choices | `APP-BRIEF.md` |

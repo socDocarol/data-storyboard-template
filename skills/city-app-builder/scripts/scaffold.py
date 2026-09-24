@@ -15,6 +15,24 @@ SAMPLES = {
 }
 
 
+def private_files(directory, names):
+    """Never copy an operator's input data, active source, or environment secrets."""
+    if Path(directory).name == "Data":
+        return set(names) - {"README.md", ".gitignore"}
+    ignored = shutil.ignore_patterns(
+        ".venv",
+        "__pycache__",
+        "*.pyc",
+        ".pytest_cache",
+        "*.log",
+        ".qa",
+        "data_source.json",
+        ".env",
+        ".env.*",
+    )(directory, names)
+    return ignored
+
+
 def scaffold(
     destination: Path,
     *,
@@ -46,9 +64,7 @@ def scaffold(
     shutil.copytree(
         STARTER,
         destination,
-        ignore=shutil.ignore_patterns(
-            ".venv", "__pycache__", "*.pyc", ".pytest_cache", "*.log", ".qa"
-        ),
+        ignore=private_files,
     )
     config_file = destination / "app_config.json"
     config = json.loads(config_file.read_text(encoding="utf-8"))
@@ -72,7 +88,8 @@ def scaffold(
         f"Defaults: Home, Explore, Compare, and About using the {sample} example; shared selection, drilldowns, record details, and group comparison.\n\n"
         f"Banner: {'Bundled City Hall image selected.' if banner else 'No banner image selected; keep the layout without an image unless the user opts in.'}\n\n"
         "Unresolved meanings: the real source's row definition, measures, and freshness.\n\n"
-        "Deferred: live data connectors, credentials, deployment, and further analyses.\n",
+        "Next source step: CSV/XLSX in Data, JSON HTTP API, or ArcGIS Open Data can be configured after field meanings are confirmed. SQL Server requires work-computer setup.\n\n"
+        "Deferred: source activation unless requested, deployment, and further analyses.\n",
         encoding="utf-8",
     )
     return destination
@@ -107,7 +124,7 @@ def main() -> None:
     except (ValueError, OSError) as error:
         parser.exit(1, f"App not created: {error}\n")
     print(
-        f"Created: {destination}\nOpen that folder and run: python start.py\nAll included data is fictional. Live connectors are deferred."
+        f"Created: {destination}\nOpen that folder and run: python start.py\nIncluded examples are fictional. See CONNECTORS.md when ready to connect a source."
     )
 
 

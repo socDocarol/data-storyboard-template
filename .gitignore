@@ -6,3 +6,6 @@ __pycache__/
 .ruff_cache/
 .qa/
 dist/
+data_source.json
+.env
+.env.*

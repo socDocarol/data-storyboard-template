@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Python Shiny starter, approved in the conversation. A portable agent skill supplies the guided discovery and build workflow. Live data connectors are deferred.
+Python Shiny starter, approved in the conversation. A portable agent skill supplies the guided discovery and build workflow. CSV/XLSX, JSON HTTP, and public ArcGIS connectors use the shared data contract. SQL Server setup is prepared for work-computer verification.
 
 ## Users
 
@@ -20,7 +20,7 @@ Help a colleague describe a useful data application, preview it with explicitly 
 
 ## Capabilities and Constraints
 
-Three-question discovery target; one main question per turn; skip known answers. Supported future source choices are files, SQL Server, APIs, Sacramento Open Data, and unknown. This release uses bundled samples only, with no credentials, connectors, built-in model service, hosting, or deployment.
+Three-question discovery target; one main question per turn; skip known answers. Source choices are CSV/XLSX in a private Data folder, JSON HTTP APIs, public ArcGIS/Sacramento Open Data, SQL Server preparation, and unknown. Samples remain the default; source activation is opt-in. HTTP API credentials use environment variables; SQL Server uses the Windows account running the app. No built-in model service, hosting, or deployment is included.
 
 Most users work on desktops. Use the available horizontal space for connected visuals, while retaining mobile reflow. Reserve one discovery question for optional banner imagery: use the example, provide an image, or no banner. If an image is pending, continue with the plain introduction.
 

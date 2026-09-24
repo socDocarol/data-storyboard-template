@@ -39,12 +39,21 @@
     });
     const routes = new Set([...document.querySelectorAll('[data-route]')].map(section => section.dataset.route));
     const defaultSample = main.dataset.defaultSample || '';
+    const sourceLocked = main.dataset.sourceLocked === 'true';
     // Selection keys that survive switching to another data source.
     const keepOnSourceChange = new Set(['condition', 'compare_by', 'order']);
     let currentPage = '', lastRecord = '', pendingDrill = false, searchTimer, ready = false, searchFocus = null;
     const read = () => {
       const [route, query = ''] = location.hash.slice(1).split('?');
-      return {page: routes.has(route) ? route : 'home', params: new URLSearchParams(query)};
+      const page = routes.has(route) ? route : 'home';
+      const params = new URLSearchParams(query);
+      // Activating a source must also work in an existing bookmarked sample tab.
+      if (sourceLocked && params.has('sample') && params.get('sample') !== defaultSample) {
+        [...params.keys()].filter(key => !keepOnSourceChange.has(key)).forEach(key => params.delete(key));
+        params.set('sample', defaultSample);
+        history.replaceState(null, '', `#${page}?${params.toString()}`);
+      }
+      return {page, params};
     };
     const href = (page, params) => `#${page}?${params.toString()}`;
     const reveal = () => header.classList.remove('is-scroll-hidden');

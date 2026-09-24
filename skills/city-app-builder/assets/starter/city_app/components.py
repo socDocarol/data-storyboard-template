@@ -456,15 +456,22 @@ def unavailable_panel(dataset: Dataset):
     """The state panel for a dataset with no current records, else None."""
     if dataset.records:
         return None
-    return state_panel(
+    panel = state_panel(
         dataset.state if dataset.state in UNAVAILABLE_STATES else "empty",
-        sample=dataset.source.is_sample,
+        sample=dataset.is_preview,
+    )
+    return (
+        ui.TagList(panel, ui.p(dataset.message, role="status"))
+        if dataset.message
+        else panel
     )
 
 
-def status_message(source: SourceInfo, state: str) -> str:
+def status_message(
+    source: SourceInfo, state: str, *, simulated: bool | None = None
+) -> str:
     """One sentence for the source-status line, keyed on the data state and is_sample."""
-    if source.is_sample:
+    if source.is_sample if simulated is None else simulated:
         messages = {
             "stale": "Showing the last available sample snapshot. A newer snapshot is unavailable in this simulation.",
             "missing": "Some fields are intentionally missing. Missing amounts are excluded from calculations, never counted as zero.",

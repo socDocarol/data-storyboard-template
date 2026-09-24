@@ -68,3 +68,76 @@ The overview now centers four borderless KPIs and their text; the hero and chart
 - The included guide is a snapshot. Generated apps are independent copies and do not receive future kit fixes automatically.
 
 Reproduction commands and packaging instructions are in [maintenance.md](maintenance.md).
+
+## Data connectors verified (0.6.0, 2026-09-24)
+
+- **67 portable tests and 8 package tests passed**, including CSV/XLSX parsing,
+  missing/zero/negative values, explicit row counts, date formats, duplicate IDs,
+  file/row/network limits, formula rejection, styled blank Excel columns, real
+  empty/error/stale states, HTTP pagination/authentication/redirect handling,
+  ArcGIS ID completeness, mocked read-only SQL, and private-data exclusions.
+  The portable suite also ran inside a fresh scaffold.
+- **Connector browser checks passed** for CSV, XLSX, a four-page local JSON API,
+  and an ArcGIS protocol fixture. They cover activation, stale sample bookmarks,
+  charts, drilldowns, details, filtered exports, refresh, Compare, About, and
+  phone rendering. Fictional fixtures retain sample labels.
+- **Real Sacramento browser check passed:** the official City's incident-maps
+  page links Hub item `5b9a9448663f41b1898643b6d91201c4`, owned by
+  `Applications_SacCity`, resolving to `SalesForce311_View/FeatureServer/0` in
+  ArcGIS organization `54falWtcpty3V47Z`. The January 1-7, 2025 UTC query loaded
+  9,386 rows; a category drill exported 2,937 matching rows. Geometry, addresses,
+  and free-text descriptions were not requested. Counts are observations from
+  this check, not fixed future expectations. The current view's retention rule
+  and retrieval-date semantics are disclosed in the example.
+- **Existing browser and source/row-limit regression checks passed.** A preexisting
+  chart-layout test race reproduced before implementation and during checking:
+  separate DOM measurements could straddle a reactive replacement. The test now
+  waits for one visible render and captures its chart positions atomically.
+- Desktop/phone screenshots were inspected. Real data exposed squeezed heatmap
+  columns and clipped record-count axis labels; minimum heatmap column width,
+  contained scrolling, and numeric count-axis labels fixed both. Layout, City
+  identity, banner, shared selection, and drilldowns remain intact. The design
+  detector reports only the inherited Inter font, required by the City guide.
+- Ruff lint/format checks and an independent connector review passed. Review
+  fixes cover old sample bookmarks after activation, credential-bearing query
+  URLs, formatted workbook trailing blanks, and truthful first-load errors.
+- A saved standalone CSV example installed its own locked runtime, started on loopback, and passed all 67 portable tests with the connector active. Its Data folder contains equivalent fictional CSV/XLSX examples.
+- SQL Server was tested with a fake ODBC connection and the offline doctor only.
+  No work database, VPN, authentication, certificate, permissions, or actual view
+  was verified. No SacMarina SQL files were changed. See the work-computer steps
+  in the connector guide.
+
+## SQL setup simplified (2026-09-24)
+
+- SQL setup now uses Windows integrated authentication from the account running
+  the local app. Server/database names are safely quoted into a generated
+  connection string; raw connection strings and SQL credentials are not accepted.
+- Reuses installed Microsoft ODBC Driver 18 or 17, preferring 18. No system
+  driver install/upgrade, DSN, database objects, new login, or automatic permission
+  change is performed. The optional Python adapter stays in the app environment.
+- Uses an existing approved table or view with existing read access. The SQL
+  example starts at 1,000 rows, with bounded selected-column queries and date
+  filters. Encryption, certificate validation, timeouts, and cleanup remain.
+- All 70 portable tests passed, including driver reuse, forced Windows auth,
+  connection-string quoting, rejection of raw credentials, an offline-only
+  prerequisite check, and mocked read-only queries. SQL remains unverified
+  against a work computer/database. No UI behavior changed in this follow-up.
+
+## Strict SQL read-only guardrails (2026-09-24)
+
+- All 80 portable tests passed, including unsafe settings/identifier/ODBC-option
+  rejection; a single execution boundary for fixed metadata SELECTs and generated
+  data SELECT; rejection of writes, DDL, EXEC, SELECT INTO, sequences, comments,
+  and extra statements; admin/wrong-database/object-type checks; effective
+  server/database/schema/object permission checks; column UPDATE exceptions;
+  and refusal when checks fail or return unknown/NULL results.
+- Mocked connections verify autocommit=False, no commit calls, explicit rollback
+  on success and failure, closed cursors/connections, and failure when cleanup
+  cannot be confirmed. SQL safety refusals
+  clear cached data. The offline doctor remains disconnected and reports that
+  permissions have not been verified.
+- An independent focused SQL review found no blocking write path. This is not
+  live SQL verification or proof of all permissions/dependencies in an actual
+  database. Views/external targets remain DBA-approved trust boundaries. A true
+  database-enforced guarantee requires IT-confirmed SELECT-only access or a
+  read-only reporting database/endpoint. No database or permissions were changed.

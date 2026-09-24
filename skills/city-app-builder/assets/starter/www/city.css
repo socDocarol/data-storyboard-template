@@ -869,7 +869,7 @@ h1:focus,main:focus {
 .composition-legend strong { grid-column: 2; color: #193953; }
 .legend-swatch { width: 10px; height: 10px; display: inline-block; }
 .heatmap-table { width: 100%; border-spacing: 5px; border-collapse: separate; table-layout: auto; min-width: 390px; }
-.heatmap-table th { padding: 4px; font-size: .75rem; font-weight: 600; overflow-wrap: anywhere; vertical-align: bottom; }
+.heatmap-table th { min-width: 5.5rem; padding: 4px; font-size: .75rem; font-weight: 600; overflow-wrap: anywhere; vertical-align: bottom; }
 .heatmap-table tbody th { text-align: left; vertical-align: middle; }
 .heat-cell { display: flex; align-items: center; justify-content: center; min-height: 42px; border-radius: 3px; font-size: .875rem; font-weight: 600; text-decoration: none; }
 .heat-0 { background: #f3f5f8; color: #324459; }

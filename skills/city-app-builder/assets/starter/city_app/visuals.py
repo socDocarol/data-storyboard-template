@@ -143,7 +143,9 @@ def _axis(low, high, unit, y):
                 ),
                 Tag(
                     "text",
-                    format_value(value, unit),
+                    f"{value:,.1f}".removesuffix(".0")
+                    if unit == "records"
+                    else format_value(value, unit),
                     x=PLOT_LEFT - 10,
                     y=y(value) + 4,
                     text_anchor="end",
@@ -379,7 +381,8 @@ def heatmap_chart(records, view, *, labels=DIMENSIONS):
                 aria_label=f"{row_label} by {column_label.lower()} heatmap; scroll for all {column_label.lower()} groups",
             ),
             ui.p(
-                "Lighter = fewer records · Darker = more · Numbers show exact counts",
+                "Lighter = fewer records · Darker = more · Numbers show exact counts"
+                + (" · Scroll to see all groups" if len(categories) > 4 else ""),
                 class_="visual-hint",
             ),
         ),

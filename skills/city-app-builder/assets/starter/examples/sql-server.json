@@ -1,0 +1,19 @@
+{
+  "kind": "sql-server",
+  "server": "",
+  "database": "",
+  "table": "dbo.ExistingTableOrView",
+  "max_rows": 1000,
+  "date_from": "2025-01-01",
+  "date_before": "2026-01-01",
+  "columns": {"record_id": "RecordId", "date": "OpenedDate", "category": "Category", "area": "Area", "status": "Status", "value": "Value"},
+  "source": {
+    "name": "Work SQL Server data (configure before activation)",
+    "description": "Windows-authentication preparation template. Use an existing table or view you can already read, and replace these field mappings and definitions with its verified meanings.",
+    "value_label": "Recorded measure (confirm meaning)",
+    "value_unit": "units",
+    "aggregation": "mean",
+    "limitation": "Not connected or verified on a work computer. Confirm row identity, date meanings, units, aggregation, permissions, and freshness before activation.",
+    "is_sample": false
+  }
+}

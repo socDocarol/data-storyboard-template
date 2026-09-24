@@ -4,7 +4,7 @@
 
 Data Storyboard Template is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
-**v0.5.3 · Python Shiny · fictional sample-data edition**
+**v0.6.0 · Python Shiny · samples and opt-in data connectors**
 
 ## Create your own app
 
@@ -23,7 +23,7 @@ Once the essentials are clear, create my app in a new folder using the bundled s
 Build and run a working local preview, check its main views and interactions, and explain exactly how I can open it and what is still sample data. Keep your explanations short and practical.
 ```
 
-Your assistant will ask a few short questions and create your app in a new folder using clearly labeled sample data.
+Your assistant will ask a few short questions and create your app in a new folder using clearly labeled sample data. When ready to connect data, put CSV/XLSX in the app's **Data** folder, or provide an HTTP API or Sacramento Open Data dataset link. Other local formats need a short choice about conversion or a specific reader.
 
 **Coding agent: start here.** Read [AGENTS.md](AGENTS.md), then follow [the City App Builder instructions](skills/city-app-builder/SKILL.md) before asking discovery questions or building. Use the bundled starter and its existing workflow for the user's app.
 
@@ -64,7 +64,8 @@ Source notes and demo controls live behind the small **information icon** beside
 | [Guided app-building skill](skills/city-app-builder/SKILL.md) | A bounded discovery conversation, brief, build, and review workflow |
 | [Working starter](skills/city-app-builder/assets/starter/) | Home, Explore, Compare, and About with linked visual drilldowns |
 | [Component recipes](skills/city-app-builder/references/components.md) | Patterns for selections, details, comparisons, and visual compositions |
-| [Data contract](skills/city-app-builder/references/data-contract.md) | The prepared record and metadata shape for a future source |
+| [Data contract](skills/city-app-builder/references/data-contract.md) | The prepared record and metadata shape for every source |
+| [Connector guide and examples](skills/city-app-builder/assets/starter/CONNECTORS.md) | CSV/XLSX in Data, JSON HTTP APIs, public ArcGIS, and SQL Server preparation |
 | [Visual standard](skills/city-app-builder/references/city-visual-standard.md) | The bundled City visual rules used by the starter |
 | [Scaffold command](skills/city-app-builder/scripts/scaffold.py) | A safe copy of the starter into a new app folder |
 
@@ -86,7 +87,9 @@ Add `--banner` to include the bundled image after choosing it. To use your own i
 
 | Working now | Deferred in this release |
 | --- | --- |
-| Local Python Shiny preview; fictional services and spending samples; visual drilldowns; search, filters, detail drawers, comparisons, CSV; shared selections and truthful sample/data states | Live connectors, credentials, real-source interpretation, deployment or hosting, an in-app AI/chat service, and independent model-performance claims |
+| Local preview; fictional samples; CSV/XLSX, paginated JSON HTTP, public ArcGIS connectors; linked visuals, drilldowns, filters, record details, comparison, and CSV | SQL Server live verification on a work computer; deployment/hosting; in-app AI/chat; unverified business definitions and performance claims |
+
+Connectors use the existing dashboard and selections. Source errors and stale snapshots remain visible. Local data and active connection configuration are excluded from shared ZIPs. SQL Server uses Windows authentication and an existing table/view, reuses installed ODBC Driver 18 or 17, and has an offline prerequisite check. Mandatory guards reject unsafe SQL/configuration and writable or unverifiable permissions for the source; transactions are rolled back, never committed. IT-confirmed read-only access and live verification remain for the work computer.
 
 The kit was tested on Windows with Python 3.12 and Microsoft Edge. Read the [verification record](docs/verification.md) for the checks performed and their limits. Read [maintenance instructions](docs/maintenance.md) to verify or package the kit.
 

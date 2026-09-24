@@ -1,4 +1,7 @@
 .venv/
+data_source.json
+.env
+.env.*
 .cache/
 .qa/
 __pycache__/

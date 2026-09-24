@@ -8,7 +8,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.5.3"
+VERSION = "0.6.0"
 EXCLUDE = {
     ".venv",
     ".cache",
@@ -34,12 +34,21 @@ def product_files():
         yield ROOT / name
     for folder in ("skills", "docs", "tests", "scripts"):
         for directory, dirs, files in os.walk(ROOT / folder):
+            if Path(directory).name == "Data":
+                dirs[:] = []
+                files = [name for name in files if name in ("README.md", ".gitignore")]
             dirs[:] = sorted(
                 name
                 for name in dirs
                 if name not in EXCLUDE and not (Path(directory) / name).is_symlink()
             )
             for name in sorted(files):
+                if (
+                    name == "data_source.json"
+                    or name == ".env"
+                    or name.startswith(".env.")
+                ):
+                    continue
                 path = Path(directory) / name
                 if path.is_symlink():
                     raise ValueError(f"Do not package symbolic links: {path}")
@@ -72,7 +81,9 @@ def main():
     with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in files:
             relative = path.relative_to(ROOT)
-            archive.write(path, (Path("data-storyboard-template") / relative).as_posix())
+            archive.write(
+                path, (Path("data-storyboard-template") / relative).as_posix()
+            )
     with zipfile.ZipFile(destination) as archive:
         if archive.testzip():
             raise ValueError("Archive CRC validation failed.")

@@ -1,6 +1,6 @@
 # Your City data app
 
-This is a working sample-data app. Every included record is fictional; there are no live data connections.
+This is a working sample-data app. Every bundled record is fictional. CSV/XLSX, JSON HTTP, and public ArcGIS connectors are available when activated; SQL Server setup is prepared for a work computer.
 
 ## Open it
 
@@ -32,11 +32,11 @@ The overview uses a wide desktop canvas, with supporting charts side by side. A 
 
 ## Ask your AI for a change
 
-> Read AGENTS.md and APP-BRIEF.md if present. Make this app more useful for [audience] by [change]. Keep the data clearly fictional and preserve the City shell.
+> Read AGENTS.md and APP-BRIEF.md if present. Make this app more useful for [audience] by [change]. Keep source/sample labels truthful and preserve the City shell.
 
-Basic wording and defaults live in [app_config.json](app_config.json). The future source belongs in the app brief; do not paste credentials into either file.
+Basic wording and defaults live in [app_config.json](app_config.json). The selected or future source belongs in the app brief; do not paste credentials into either file. Put CSV/XLSX in [Data](Data/) and follow [CONNECTORS.md](CONNECTORS.md). For other local formats, ask whether to convert or add a reader.
 
-The data interface is in [city_app/data.py](city_app/data.py). It represents prepared records and source information, and its `PROVIDERS` registry is where a future SQL/API/Open Data connector is added. The app's sample disclosures switch automatically when a source declares `is_sample=False`, but a working loader does not establish that field meanings, units, freshness, and row limits have been verified.
+The data interface is in [city_app/data.py](city_app/data.py). It represents prepared records and source information, and its `PROVIDERS` registry is shared by samples and configured connectors. The app's sample disclosures switch automatically when a source declares `is_sample=False`, but a working loader does not establish that field meanings, units, freshness, and row limits have been verified.
 
 ## Check a change
 

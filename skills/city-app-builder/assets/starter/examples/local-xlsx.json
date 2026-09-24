@@ -1,0 +1,16 @@
+{
+  "kind": "local",
+  "path": "example-services.xlsx",
+  "sheet": "Requests",
+  "columns": {"record_id": "record_id", "date": "date", "category": "category", "area": "area", "status": "status", "value": "value"},
+  "source": {
+    "name": "Fictional requests from an Excel workbook",
+    "description": "One row is one invented service request. Dates are request-opened dates.",
+    "value_label": "Mean days to close",
+    "value_unit": "days",
+    "aggregation": "mean",
+    "updated_at": "2026-07-01",
+    "limitation": "Fictional connector example. Open requests have no duration. This does not measure overdue work or an official service target.",
+    "is_sample": true
+  }
+}

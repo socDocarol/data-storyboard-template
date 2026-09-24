@@ -1,0 +1,17 @@
+{
+  "kind": "http",
+  "url": "http://127.0.0.1:8130/requests?page=1",
+  "records_path": "records",
+  "pagination": {"mode": "next", "next_path": "next"},
+  "columns": {"record_id": "record_id", "date": "date", "category": "category", "area": "area", "status": "status", "value": "value"},
+  "source": {
+    "name": "Fictional requests from the local example API",
+    "description": "One row is one invented service request served by a local paginated HTTP endpoint. Dates are request-opened dates.",
+    "value_label": "Mean days to close",
+    "value_unit": "days",
+    "aggregation": "mean",
+    "updated_at": "2026-07-01",
+    "limitation": "Fictional connector example, not a City API. Open requests have no duration.",
+    "is_sample": true
+  }
+}

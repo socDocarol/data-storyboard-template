@@ -6,8 +6,8 @@ The [bundled visual guide](skills/city-app-builder/references/city-visual-standa
 - Symmetric three-column header with a centered identity group, 64px desktop and 60px mobile height. Navigation becomes a 40px menu below 1280px.
 - Local Inter body/control text and Josefin Sans headings. White page, blue data marks, restrained neutral surfaces, readable source notes.
 - Fixed-size headings and controls, responsive grids, a contained wide table, visible focus, keyboard menu, stable data-state space, and reduced motion.
-- Home explains the active fictional example. Explore filters, inspects, and downloads records. Compare presents two groups with explicit scope and neutral differences. Shared selections, ancestor breadcrumbs, and record-detail drawers connect these views. About explains meanings, snapshot date, calculations, and limitations.
-- Sample controls belong to this preview edition and have no connection side effects.
+- Home explains the active source or fictional example. Explore filters, inspects, and downloads records. Compare presents two groups with explicit scope and neutral differences. Shared selections, ancestor breadcrumbs, and record-detail drawers connect these views. About explains meanings, snapshot date, calculations, and limitations.
+- Sample condition controls simulate bundled examples only. Connected sources report their actual state; their setup hides preview controls.
 - Routine sample/source notices and demo controls live in one compact information disclosure beside the introduction. It opens on hover, keyboard focus, or click; stays usable while moving into its controls; and closes on Escape or outside click. Nonready data changes the icon to an attention color. Empty/error/loading states stay in the affected chart view, while sample identity remains available in the disclosure, footer, and exports.
 
 The guide's shell and component prescriptions take precedence over generic stylistic preferences. The preview is used by colleagues at a desktop or on a phone in ordinary office light, so the white content surface and cobalt identity remain consistent.

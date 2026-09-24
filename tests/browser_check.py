@@ -332,9 +332,15 @@ def run():
                 if width >= 1280:
                     container = page.locator(".city-container").bounding_box()
                     assert container["width"] >= width * 0.9, (width, container)
-                    heatmap = page.locator("#heatmap").bounding_box()
-                    composition = page.locator("#composition").bounding_box()
-                    record_plot = page.locator("#record-plot").bounding_box()
+                    # A source/route update can replace charts between separate
+                    # locator reads. Measure one visible render atomically.
+                    heatmap, composition, record_plot = page.wait_for_function(
+                        """() => {
+                          const nodes = ['heatmap', 'composition', 'record-plot'].map(id => document.getElementById(id));
+                          if (nodes.some(node => !node || !node.getClientRects().length)) return false;
+                          return nodes.map(node => ({y: node.getBoundingClientRect().y}));
+                        }"""
+                    ).json_value()
                     assert abs(heatmap["y"] - composition["y"]) < 2
                     assert abs(heatmap["y"] - record_plot["y"]) < 2
                 assert geometry["height"] == (60 if width < 768 else 64), (

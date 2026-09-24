@@ -74,7 +74,7 @@ def main() -> None:
     if not args.no_browser:
         threading.Thread(target=open_when_ready, daemon=True).start()
     print(
-        f"\nOpen {url}\nAll data is fictional. Keep this window open. Press Ctrl+C to stop.\n",
+        f"\nOpen {url}\nCheck Data information for the active source and sample status. Keep this window open. Press Ctrl+C to stop.\n",
         flush=True,
     )
     subprocess.run(
@@ -101,7 +101,7 @@ if __name__ == "__main__":
         print("\nApp stopped.")
     except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
         print(
-            f"Could not start the app: {error}\nShare this message with your coding assistant. No live data connection was attempted.",
+            f"Could not start the app: {error}\nShare this message with your coding assistant; do not include credentials.",
             file=sys.stderr,
         )
         sys.exit(1)

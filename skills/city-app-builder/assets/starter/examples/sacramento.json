@@ -1,0 +1,28 @@
+{
+  "kind": "arcgis",
+  "url": "https://data.cityofsacramento.org/datasets/5b9a9448663f41b1898643b6d91201c4_0/explore",
+  "where": "DateCreated >= DATE '2025-01-01' AND DateCreated < DATE '2025-01-08'",
+  "date_format": "unix_ms",
+  "columns": {
+    "record_id": "OBJECTID",
+    "date": "DateCreated",
+    "category": "CategoryLevel1",
+    "area": "CouncilDistrictNumber",
+    "status": "PublicStatus",
+    "value": null
+  },
+  "source": {
+    "name": "Sacramento 311 public service calls, January 1-7, 2025 (UTC)",
+    "description": "One row is one published Sacramento 311 incident. Date is DateCreated grouped by UTC calendar date; area is the published council district. Publisher: Applications_SacCity.",
+    "value_label": "Published incidents",
+    "value_unit": "records",
+    "aggregation": "sum",
+    "labels": {
+      "area": "Council district",
+      "status": "Case status"
+    },
+    "limitation": "A bounded extract from Sacramento 311 Calls View (Current), linked by the City's official 311 incident maps page. The current view contains calls last updated on or after January 1, 2023, so historical completeness is not guaranteed. Each loaded row contributes one to the published-incident count. This is a record count, not a measure of service quality, duration, or lateness. Dates use UTC, not Sacramento local time. OBJECTID is a service row identifier, not a permanent case identifier. Public status reflects the published snapshot and can change. No geometry, addresses, or free-text descriptions are requested.",
+    "is_sample": false
+  },
+  "value_mode": "count"
+}

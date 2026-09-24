@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +21,49 @@ def module(name):
 
 
 class PackageTests(unittest.TestCase):
+    def test_private_inputs_and_active_config_are_not_scaffolded_or_packaged(self):
+        create = module("scaffold")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            starter = root / "skills/city-app-builder/assets/starter"
+            data = starter / "Data"
+            data.mkdir(parents=True)
+            (data / "private.csv").write_text("secret")
+            (data / "nested").mkdir()
+            (data / "nested/private.csv").write_text("secret")
+            (data / "README.md").write_text("Put files here")
+            (data / ".gitignore").write_text("*")
+            (starter / "data_source.json").write_text("{}")
+            (starter / ".env.local").write_text("secret")
+            (starter / "app_config.json").write_text(
+                (create.STARTER / "app_config.json").read_text()
+            )
+            with patch.object(create, "STARTER", starter):
+                app = create.scaffold(
+                    root / "app",
+                    title="Private test",
+                    sample="services",
+                    future_source="file",
+                )
+            self.assertEqual(
+                {path.name for path in (app / "Data").iterdir()},
+                {"README.md", ".gitignore"},
+            )
+            self.assertFalse((app / "data_source.json").exists())
+            self.assertFalse((app / ".env.local").exists())
+            spec = importlib.util.spec_from_file_location(
+                "package_privacy", ROOT / "scripts/package.py"
+            )
+            package = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(package)
+            with patch.object(package, "ROOT", root):
+                files = list(package.product_files())
+            self.assertIn(data / "README.md", files)
+            self.assertNotIn(data / "private.csv", files)
+            self.assertNotIn(data / "nested/private.csv", files)
+            self.assertNotIn(starter / "data_source.json", files)
+            self.assertNotIn(starter / ".env.local", files)
+
     def test_scaffold_is_standalone_and_preserves_source(self):
         create = module("scaffold")
         original = (create.STARTER / "app_config.json").read_bytes()

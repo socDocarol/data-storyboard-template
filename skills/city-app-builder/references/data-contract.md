@@ -21,7 +21,7 @@ The app supports one deliberately small analytical shape. It is not a universal 
 
 ## Working rules
 
-- Home counts every record in the active source. Explore filters and its download share the same filtered records and ordering. Home is intentionally not affected by Explore filters; the UI states this.
+- Home, Explore, record details, and downloads share the active selection. Compare omits only its comparison dimension and states that scope.
 - `filter_records` applies every selection (three dimensions, month, search, order) in one pass. `ViewState.select` is the only caller in the app; use it rather than filtering by hand.
 - `monthly_groups` is the one month-by-month iterator. Trends, comparisons, and counts all use it, so zero-record months and year boundaries behave identically everywhere.
 - Mean and sum use recorded values only, with the contributor count visible. No recorded values produces Not recorded, not zero.
@@ -29,7 +29,13 @@ The app supports one deliberately small analytical shape. It is not a universal 
 - The sample providers parse each CSV once per process and reuse the immutable records. Simulated conditions never mutate the cached base.
 - The records table shows at most `MAX_TABLE_ROWS` rows (app.py) and the record plot at most `MAX_PLOT_POINTS` values (visuals.py); the CSV always contains every filtered record. Raise these only with a measured reason.
 
-## Adding a connector
+## Built-in connectors
+
+Use [CONNECTORS.md](../assets/starter/CONNECTORS.md) for CSV/XLSX, JSON HTTP, public ArcGIS, and optional SQL Server. `register_source` loads the opt-in `data_source.json` and registers `connected` before app configuration is read. Mapping keeps internal names stable. `value_mode: "count"` explicitly counts rows (one per row, sum); otherwise missing numeric values remain `None`.
+
+`Dataset.message` carries safe actionable errors. `Dataset.is_preview` distinguishes simulated states from real failures, including when a connector serves fictional example rows. Configured loaders ignore preview conditions, briefly cache snapshots, and keep only a marked last-good in-memory snapshot after refresh failures. Validation and transfer-limit failures never return partial results.
+
+## Adding a custom connector
 
 `load_dataset(name, condition)` in `data.py` is the only place the app asks for data. It dispatches to `PROVIDERS[name]`, a `Provider(source, load)` pair. The bundled samples are registered this way; a live source is added the same way.
 
@@ -40,4 +46,4 @@ The app supports one deliberately small analytical shape. It is not a universal 
 5. Run `python -m unittest discover -s tests -v` and open the app. The fictional-sample banner, footer, captions, record drawer, download label, About text, and CSV label all switch automatically because they read `disclosure(source, key)` in `components.py`, keyed on `is_sample`. Nothing else in the app decides whether data is fictional.
 6. Update the About wording and `APP-BRIEF.md` with the verified row definition, unit, aggregation, freshness, and limitations. A working loader does not establish that the field meanings are right.
 
-Never put credentials in `app_config.json`, the brief, or source code. Read them from the environment inside the loader and document the variable names in the brief.
+Never put credentials in `app_config.json`, the brief, or source code. Read API credentials from the environment inside the loader and document variable names in the brief. The SQL Server adapter uses the Windows account running the app and needs no credential environment variable.

@@ -44,6 +44,7 @@ from city_app.data import (
     measure,
 )
 from city_app.state import ViewState, compare_groups, compare_months, grouped_counts
+from city_app.sources.configured import register_source
 from city_app.visuals import (
     composition_chart,
     heatmap_chart,
@@ -127,6 +128,7 @@ def read_config(path: Path) -> dict:
     return config
 
 
+register_source(ROOT)
 CONFIG = read_config(ROOT / "app_config.json")
 
 
@@ -136,7 +138,7 @@ def preview_controls():
         ui.div(
             ui.input_select(
                 "sample",
-                "Example dataset",
+                "Data source",
                 {name: provider.source.name for name, provider in PROVIDERS.items()},
                 selected=CONFIG["sample"],
             ),
@@ -144,7 +146,7 @@ def preview_controls():
             class_="preview-grid",
         ),
         ui.p(
-            "These controls change fictional examples only. No database or API is contacted."
+            "Data conditions simulate bundled examples only. A configured source reports its actual state."
         ),
         class_="preview-controls",
         hidden=not CONFIG["show_preview_controls"],
@@ -221,6 +223,7 @@ app_ui = ui.page_fluid(
         id="main",
         tabindex="-1",
         data_default_sample=CONFIG["sample"],
+        data_source_locked="false" if CONFIG["show_preview_controls"] else "true",
     ),
     ui.tags.dialog(
         ui.tags.button(
@@ -251,6 +254,10 @@ def server(input: Inputs, output: Outputs, session: Session):
     @reactive.event(input.dashboard_state)
     def receive_state():
         incoming = ViewState.from_payload(input.dashboard_state(), CONFIG["sample"])
+        if not CONFIG["show_preview_controls"] and incoming.sample != CONFIG["sample"]:
+            incoming = replace(
+                incoming.clear(), sample=CONFIG["sample"], left="", right=""
+            )
         view.set(incoming)
         if incoming.without_record() != selection():
             selection.set(incoming.without_record())
@@ -267,7 +274,7 @@ def server(input: Inputs, output: Outputs, session: Session):
     def introduction():
         if selection().sample == CONFIG["sample"]:
             return CONFIG["description"]
-        return "Previewing another example. " + dataset().source.description
+        return dataset().source.description
 
     @render.ui
     def selection_summary():
@@ -354,7 +361,12 @@ def server(input: Inputs, output: Outputs, session: Session):
         current = dataset()
         return ui.div(
             ui.strong(current.source.name),
-            ui.span(status_message(current.source, current.state)),
+            ui.span(
+                status_message(
+                    current.source, current.state, simulated=current.is_preview
+                )
+            ),
+            ui.p(current.message) if current.message else None,
             class_=f"source-status status-{current.state}",
             role="status",
         )
@@ -688,7 +700,7 @@ def server(input: Inputs, output: Outputs, session: Session):
                     "Record unavailable in this view", id="record-title", tabindex="-1"
                 ),
                 ui.p(
-                    "The record may be outside your selection or unavailable in this sample. Close details and broaden the view."
+                    "The record may be outside your selection or unavailable in this source. Close details and broaden the view."
                 ),
                 data_record_content=record_id,
             )
@@ -696,7 +708,8 @@ def server(input: Inputs, output: Outputs, session: Session):
 
     @render.ui
     def about():
-        source = dataset().source
+        current = dataset()
+        source = current.source
         return ui.div(
             ui.h2(disclosure(source, "about_heading")),
             ui.p(
@@ -705,7 +718,11 @@ def server(input: Inputs, output: Outputs, session: Session):
             ),
             ui.h2("Source and freshness"),
             ui.p(source.name + ". " + source.description),
-            ui.p(disclosure(source, "about_snapshot")),
+            ui.p(
+                "No successful snapshot has been loaded."
+                if current.state == "error" and not current.is_preview
+                else disclosure(source, "about_snapshot")
+            ),
             ui.h2("How the numbers are calculated"),
             ui.p(
                 "Record totals count rows. Shared selections apply to charts, records, details, and downloads. Compare retains all filters except the dimension being compared; its scope is stated above the results."
@@ -723,9 +740,9 @@ def server(input: Inputs, output: Outputs, session: Session):
             ),
             ui.h2(disclosure(source, "about_limits_heading")),
             ui.p(source.limitation),
-            ui.h2("Connecting your data later") if source.is_sample else None,
+            ui.h2("Connecting your data") if source.is_sample else None,
             ui.p(
-                "Your future source may be a file, SQL Server, an API, or Sacramento Open Data. This version does not connect to those sources. Keep the preview fictional until a connection and its field meanings have been verified."
+                "CSV and XLSX files in Data, JSON HTTP APIs, and ArcGIS Open Data can use the same views. SQL Server setup is prepared for a work computer. Your coding assistant can configure the source after confirming its field meanings. These example records remain fictional."
             )
             if source.is_sample
             else None,
