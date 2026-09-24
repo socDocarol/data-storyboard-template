@@ -20,7 +20,7 @@ Install and run from a development folder, not a notes vault or Working Hub. The
 2. Open **Explore**, choose filters, and search for a record. Open its ID for details; Escape closes the drawer. Use **Compare** for two groups, their measures, and monthly counts.
 3. Download the matching rows. The CSV identifies every row as fictional.
 4. Open **About** to see definitions, the example snapshot date, and limitations.
-5. Use **Try another example or data condition** to see spending, missing fields, stale data, empty results, errors, or a paused loading view.
+5. Hover, focus, click, or tap the **information icon** beside the introduction. Open **Preview options** to see spending, missing fields, stale data, empty results, errors, or a paused loading view. Escape or clicking outside closes the panel.
 
 Your selections persist across views and in bookmarks, refresh, and browser history. Compare keeps every filter except its chosen comparison dimension, with the scope displayed above its results.
 

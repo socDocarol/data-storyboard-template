@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from htmltools import Tag
 from shiny import ui
 
 from city_app.data import (
@@ -160,6 +161,29 @@ def sample_banner(source: SourceInfo):
         ui.strong(disclosure(source, "banner_title")),
         ui.span(disclosure(source, "banner")),
         class_="sample-notice",
+    )
+
+
+def information_icon(state: str):
+    return ui.span(
+        Tag(
+            "svg",
+            Tag("circle", cx="12", cy="12", r="9"),
+            Tag("path", d="M12 11v6M12 7v1"),
+            viewBox="0 0 24 24",
+            fill="none",
+            stroke="currentColor",
+            stroke_width="1.8",
+            stroke_linecap="round",
+            aria_hidden="true",
+            width="22",
+            height="22",
+        ),
+        ui.span(
+            "Data needs attention" if state != "ready" else "Data information",
+            class_="sr-only",
+        ),
+        class_="info-symbol" + (" info-attention" if state != "ready" else ""),
     )
 
 

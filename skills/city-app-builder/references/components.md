@@ -4,7 +4,7 @@ Use these tested behaviors as a unit. A useful app connects summary, context, co
 
 ## Visual selection and screen hierarchy
 
-The first screen is a visual overview: an optional civic banner, compact headline numbers, a prominent primary plot, then a few complementary views. Use short titles/units and one-line hints. Full tables, methods, interpretation, and longer explanations belong in drilldowns, expandable notes, and About. Source/sample status and meaningful stale/missing warnings remain visible. At desktop size the primary chart should begin within the first viewport.
+The first screen is a visual overview: an optional civic banner, compact headline numbers, a prominent primary plot, then a few complementary views. Use short titles/units and one-line hints. Full tables, methods, interpretation, and longer explanations belong in drilldowns, expandable notes, and About. Routine source/sample notes and preview controls live in the compact Data information disclosure. Its attention color flags nonready data; hover, focus, or click reveals details. Empty/error/loading messages remain in the affected view. At desktop size the primary chart should begin within the first viewport.
 
 Use a banner only when the person selected it. It is local civic imagery with meaningful alt text and an honest credit, never a simulated chart or source evidence. Keep it visually subordinate to the main analytical task: it must not cover the primary trend, sample disclosure, warnings, or controls. Lay out desktop screens first through 1920px with roughly 32px outer gutters, a dominant trend, and compact supporting charts; retain the shared City header height/identity and responsive mobile behavior.
 

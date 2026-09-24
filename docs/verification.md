@@ -43,6 +43,13 @@ Boundaries above still apply. No connector was added; the provider registry, lab
 - Ruff lint/format and the skill validator passed. The visual detector's only finding was Inter, retained because it is required by the City guide.
 - City Hall photography is inherited unchanged from Budget Atlas as contextual imagery; asset attribution and the inherited usage boundary are recorded in the starter's asset notes. No live connection was added.
 
+## Compact information disclosure verified (2026-09-24)
+
+- The two full-width sample/preview rows were replaced by one information control beside the introduction. The source notice, state explanation, and preview selectors remain inside its panel; nonready data gets an amber indicator and unavailable chart views retain their messages.
+- Browser checks passed for hover into the panel, pointer exit, keyboard focus, Escape with focus return, click pinning, click-away dismissal, phone-width controls, route changes, and preserving open controls through state changes. Existing chart, record, filter, download, history, and responsive checks still pass.
+- The focused source/row-limit regression suite passed, including consistent disclosures through source switches and refresh. Closed-overview and expanded-panel screenshots were inspected.
+- The 47 portable tests, 7 package tests, Ruff, and skill validation passed. No dependencies or live connections were added.
+
 ## Boundaries
 
 - The question bank and conversation cases were reviewed against the requested workflow. No independent smaller-model trial has been performed, and no model-performance improvement is claimed yet.

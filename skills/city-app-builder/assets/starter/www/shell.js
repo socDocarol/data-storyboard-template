@@ -8,6 +8,35 @@
     const menu = document.getElementById('city-menu');
     const dialog = document.getElementById('record-dialog');
     const main = document.getElementById('main');
+    const info = document.getElementById('data-info');
+    const infoTrigger = document.getElementById('data-info-trigger');
+    let infoPinned = false, infoDismissing = false;
+    const closeInfo = (restoreFocus = false) => {
+      info.open = false;
+      infoPinned = false;
+      if (restoreFocus) {
+        infoDismissing = true;
+        infoTrigger.focus({preventScroll: true});
+        infoDismissing = false;
+      }
+    };
+    info.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse') info.open = true;
+    });
+    info.addEventListener('pointerleave', () => {
+      if (!infoPinned && !info.contains(document.activeElement)) closeInfo();
+    });
+    infoTrigger.addEventListener('focus', () => {
+      if (!infoDismissing) info.open = true;
+    });
+    infoTrigger.addEventListener('click', event => {
+      event.preventDefault();
+      infoPinned = !infoPinned;
+      info.open = infoPinned;
+    });
+    info.addEventListener('focusout', event => {
+      if (!info.contains(event.relatedTarget)) closeInfo();
+    });
     const routes = new Set([...document.querySelectorAll('[data-route]')].map(section => section.dataset.route));
     const defaultSample = main.dataset.defaultSample || '';
     // Selection keys that survive switching to another data source.
@@ -55,6 +84,7 @@
       menu.open = false;
       reveal();
       if (currentPage && page !== currentPage) {
+        closeInfo();
         document.querySelector(`[data-route="${page}"] h1`).focus({preventScroll: true});
         window.scrollTo({top: 0, behavior: 'instant'});
       }
@@ -86,6 +116,7 @@
       searchTimer = setTimeout(() => change('query', value, true), 350);
     });
     document.addEventListener('click', event => {
+      if (!info.contains(event.target)) closeInfo();
       if (event.target.closest('[data-close-record]')) closeRecord();
       const link = event.target.closest('a');
       if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && event.button === 0) {
@@ -106,6 +137,10 @@
       if (!menu.contains(event.target)) menu.open = false;
     });
     document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && info.open) {
+        event.preventDefault();
+        closeInfo(true);
+      }
       if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
     });
     new MutationObserver(syncDialog).observe(document.getElementById('record_details'), {childList: true, subtree: true});

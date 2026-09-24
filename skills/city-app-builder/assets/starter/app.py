@@ -19,6 +19,7 @@ from city_app.components import (
     comparison_chart,
     disclosure,
     drill_breadcrumbs,
+    information_icon,
     page_intro,
     record_panel,
     sample_banner,
@@ -130,7 +131,7 @@ CONFIG = read_config(ROOT / "app_config.json")
 
 def preview_controls():
     return ui.tags.details(
-        ui.tags.summary("Try another example or data condition"),
+        ui.tags.summary("Preview options"),
         ui.div(
             ui.input_select(
                 "sample",
@@ -168,9 +169,22 @@ app_ui = ui.page_fluid(
     site_header(CONFIG["title"], CONFIG["portal_url"]),
     ui.tags.main(
         ui.div(
-            ui.output_ui("source_banner"),
-            preview_controls(),
-            ui.output_ui("source_status"),
+            ui.tags.details(
+                ui.tags.summary(
+                    ui.output_ui("info_icon", inline=True),
+                    id="data-info-trigger",
+                    aria_label="Data information and preview options",
+                ),
+                ui.div(
+                    ui.output_ui("source_banner"),
+                    ui.output_ui("source_status"),
+                    preview_controls(),
+                    ui.a("Sources and definitions", href="#about"),
+                    class_="data-info-panel",
+                ),
+                id="data-info",
+                class_="data-info",
+            ),
             ui.output_ui("selection_summary"),
             page(
                 "home",
@@ -323,6 +337,11 @@ def server(input: Inputs, output: Outputs, session: Session):
     @render.ui
     def source_banner():
         return sample_banner(dataset().source)
+
+    @output(suspend_when_hidden=False)
+    @render.ui
+    def info_icon():
+        return information_icon(dataset().state)
 
     @output(suspend_when_hidden=False)
     @render.ui

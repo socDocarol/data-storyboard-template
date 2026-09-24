@@ -4,7 +4,7 @@
 
 City App Kit is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
-**v0.5.0 · Python Shiny · fictional sample-data edition**
+**v0.5.1 · Python Shiny · fictional sample-data edition**
 
 ![City App Kit overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
 
@@ -31,6 +31,8 @@ Every included data record is fictional. The optional City Hall photograph suppl
 The desktop-first Home view uses a wide canvas up to 1,920 pixels, with an optional image banner and a prominent trend. Ranked bars, status composition, a category-by-area heatmap, and selectable records share the space. Drill from a category, area, status, or month to the records behind it. Explore adds search, filters, record details, and a matching CSV download. Compare places two groups side by side and aligns their monthly patterns. About explains definitions and limits.
 
 Selections stay with you as you move between views, refresh the page, or use browser Back and Forward. The preview also lets you switch between fictional service-request and spending examples, and show states such as missing, stale, empty, unavailable, and loading data.
+
+Source notes and demo controls live behind the small **information icon** beside the introduction. Hover, focus, click, or tap it to reveal the details; open **Preview options** to switch examples. Escape or a click outside closes it. An amber icon flags data that needs attention.
 
 ![Record details drawer in the fictional service-request example](docs/images/record-details.png)
 

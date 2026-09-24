@@ -20,6 +20,27 @@ STARTER = Path(
 EVIDENCE = ROOT / ".qa"
 
 
+def data_info(page):
+    return page.locator("#data-info.data-info")
+
+
+def open_data_info(page, *, preview=False):
+    panel = data_info(page)
+    if panel.get_attribute("open") != "":
+        page.locator("#data-info-trigger").click()
+        expect(panel).to_have_attribute("open", "")
+    if preview and page.locator(".preview-controls").get_attribute("open") != "":
+        page.locator(".preview-controls > summary").click()
+        expect(page.locator(".preview-controls")).to_have_attribute("open", "")
+
+
+def close_data_info(page):
+    panel = data_info(page)
+    if panel.get_attribute("open") == "":
+        page.keyboard.press("Escape")
+        expect(panel).not_to_have_attribute("open", "")
+
+
 def run():
     EVIDENCE.mkdir(exist_ok=True)
     with socket.socket() as listener:
@@ -101,6 +122,7 @@ def run():
             )
             expect(page.locator(".record-point-link")).to_have_count(36)
             expect(page.locator(".selection-notes")).not_to_have_attribute("open", "")
+            close_data_info(page)
             page.screenshot(
                 path=str(EVIDENCE / "visual-overview-1440.png"), full_page=True
             )
@@ -259,7 +281,8 @@ def run():
             checks.append("addressable routes, refresh, Back and Forward")
 
             page.locator('.city-nav a[data-page="home"]').click()
-            page.locator(".preview-controls > summary").click()
+            expect(data_info(page)).not_to_have_attribute("open", "")
+            open_data_info(page, preview=True)
             for condition, expected in (
                 ("empty", "No records to show"),
                 ("error", "The example data is unavailable"),
@@ -270,19 +293,24 @@ def run():
                     page.get_by_role("heading", name=expected, exact=True)
                 ).to_be_visible()
                 expect(page.locator("#overview .stat-card")).to_have_count(0)
+                expect(data_info(page)).to_have_attribute("open", "")
             page.select_option("#condition", "stale")
             expect(page.locator(".source-status")).to_contain_text("last available")
+            expect(page.locator(".info-symbol.info-attention")).to_be_visible()
             expect(page.locator(".stat-value").first).to_have_text("48")
             page.select_option("#condition", "missing")
             expect(page.locator(".source-status")).to_contain_text(
                 "intentionally missing"
             )
+            expect(page.locator(".info-symbol.info-attention")).to_be_visible()
             page.select_option("#sample", "spending")
             expect(page.locator("#introduction")).to_contain_text("spending entry")
             expect(page.locator(".stat-card").nth(1)).to_contain_text("36 of 48")
             page.select_option("#condition", "ready")
             expect(page.locator(".stat-value").nth(1)).to_have_text("$851,949.00")
             page.locator('.city-nav a[data-page="explore"]').click()
+            expect(data_info(page)).not_to_have_attribute("open", "")
+            open_data_info(page, preview=True)
             page.select_option("#order", "value-low")
             expect(page.locator(".table-scroll tbody tr").first).to_contain_text(
                 "−$7,500.00"
@@ -290,7 +318,8 @@ def run():
             checks.append("all six data conditions, spending credits and ordering")
 
             # Test long category labels in the spending sample at every required width.
-            page.locator(".preview-controls > summary").click()
+            page.locator('.city-nav a[data-page="home"]').click()
+            open_data_info(page, preview=True)
             for width in (2048, 1440, 800, 390, 320):
                 page.set_viewport_size({"width": width, "height": 1000})
                 page.evaluate("location.hash = 'home?sample=spending'")
@@ -319,6 +348,7 @@ def run():
                     page.wait_for_function(
                         "!document.documentElement.classList.contains('shiny-busy') && !document.querySelector('#overview.recalculating')"
                     )
+                    close_data_info(page)
                     page.screenshot(
                         path=str(EVIDENCE / f"home-{width}.png"), full_page=True
                     )
@@ -329,6 +359,7 @@ def run():
                 else:
                     page.locator('.city-nav a[data-page="explore"]').click()
                 expect(page.locator(".table-scroll tbody tr")).to_have_count(48)
+                expect(data_info(page)).not_to_have_attribute("open", "")
                 assert page.evaluate(
                     "document.documentElement.scrollWidth <= innerWidth"
                 ), width
@@ -339,6 +370,38 @@ def run():
             checks.append(
                 "2048/1440/800/390/320 geometry, long labels, table overflow, menu selection"
             )
+
+            page.set_viewport_size({"width": 1440, "height": 1000})
+            page.locator('.city-nav a[data-page="home"]').click()
+            trigger = page.locator("#data-info-trigger")
+            panel = data_info(page)
+            trigger.hover()
+            expect(panel).to_have_attribute("open", "")
+            page.locator(".data-info-panel").hover()
+            expect(panel).to_have_attribute("open", "")
+            page.locator("#main").hover()
+            expect(panel).not_to_have_attribute("open", "")
+            trigger.focus()
+            expect(panel).to_have_attribute("open", "")
+            page.keyboard.press("Escape")
+            expect(panel).not_to_have_attribute("open", "")
+            expect(trigger).to_be_focused()
+            trigger.click()
+            expect(panel).to_have_attribute("open", "")
+            page.locator("#main").click(position={"x": 5, "y": 5})
+            expect(panel).not_to_have_attribute("open", "")
+            page.set_viewport_size({"width": 390, "height": 1000})
+            trigger.click()
+            expect(panel).to_have_attribute("open", "")
+            expect(page.locator(".preview-controls > summary")).to_be_visible()
+            close_data_info(page)
+            page.set_viewport_size({"width": 1440, "height": 1000})
+            checks.append(
+                "data information hover, keyboard, click-away, and mobile trigger behavior"
+            )
+
+            page.locator('.city-nav a[data-page="explore"]').click()
+            page.set_viewport_size({"width": 320, "height": 1000})
 
             page.locator(".city-menu-button").focus()
             page.keyboard.press("Enter")

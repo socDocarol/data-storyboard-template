@@ -97,8 +97,13 @@ def wait_for_server(url: str, process: subprocess.Popen[str]) -> None:
 
 
 def select_source(page, source: str) -> None:
+    data_info = page.locator("#data-info.data-info")
+    if data_info.get_attribute("open") != "":
+        page.locator("#data-info-trigger").click()
+        expect(data_info).to_have_attribute("open", "")
     if not page.locator(".preview-controls").get_attribute("open") == "":
         page.locator(".preview-controls > summary").click()
+        expect(page.locator(".preview-controls")).to_have_attribute("open", "")
     page.select_option("#sample", source)
     page.wait_for_function(f"location.hash.includes('sample={source}')")
     expect(page.locator("#sample")).to_have_value(source)
@@ -141,9 +146,11 @@ def run() -> None:
             expect(page.locator("#overview figure").first).to_be_visible()
             expect(page.locator(".heatmap-table thead")).to_contain_text("District")
             expect(page.locator(".heatmap-table caption")).to_contain_text("category")
+            page.screenshot(path=str(EVIDENCE / "data-info-open.png"), full_page=True)
             checks.append("partial source labels preserve Home heatmap charts")
 
             page.locator('.city-nav a[data-page="explore"]').click()
+            expect(page.locator("#data-info")).not_to_have_attribute("open", "")
             expect(page.locator(".table-scroll tbody tr")).to_have_count(500)
             limit_message = page.locator(".table-limit-note, .table-hint").filter(
                 has_text="Showing the first 500 of 501 records"
@@ -169,6 +176,7 @@ def run() -> None:
             page.set_viewport_size({"width": 1440, "height": 1000})
             page.locator('.city-nav a[data-page="home"]').click()
             select_source(page, "services")
+            expect(page.locator("#data-info")).to_have_attribute("open", "")
             expect(page.locator(".sample-notice")).to_contain_text("Sample data")
             expect(page.locator(".footer-meta")).to_contain_text(
                 "Fictional sample data"
@@ -184,6 +192,7 @@ def run() -> None:
             )
             expect(page.locator(".footer-meta")).not_to_contain_text("Fictional sample")
             page.locator('.city-nav a[data-page="explore"]').click()
+            expect(page.locator("#data-info")).not_to_have_attribute("open", "")
             expect(page.locator(".table-scroll caption")).to_contain_text(
                 "Synthetic 501-record regression source"
             )
