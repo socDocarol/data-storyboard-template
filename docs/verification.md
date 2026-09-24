@@ -54,6 +54,10 @@ Boundaries above still apply. No connector was added; the provider registry, lab
 
 The borderless KPI group now stays within 800px, uses the same left content inset as the hero and charts, and aligns values through wrapped labels. Focused browser checks passed for both datasets at 2048, 1440, 800, 620, 390, and 320px: content edges align within one pixel, KPI values share a row, and neither page nor values overflow. Desktop and phone screenshots were inspected; the layout detector reported no findings. This was a CSS-only refinement; calculation and data tests were not rerun.
 
+## Four centered KPIs verified (2026-09-24)
+
+The overview now centers four borderless KPIs and their text; the hero and charts retain their existing alignment. The new area-group metric follows the selection and excludes unrecorded area labels. Focused browser checks passed for both samples at 2048, 1440, 1024, 800, 620, 390, and 320px: four visible metrics, centered group/text, desktop row and smaller-screen 2×2 layout, aligned values, and no overflow or JavaScript errors. Filtered North counts one area; an unrecorded-only selection counts zero. Desktop and phone screenshots were inspected. The 47 portable tests through the scaffold, 7 package tests, and layout detector also passed.
+
 ## Boundaries
 
 - The question bank and conversation cases were reviewed against the requested workflow. No independent smaller-model trial has been performed, and no model-performance improvement is claimed yet.

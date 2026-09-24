@@ -831,8 +831,8 @@ h1:focus,main:focus {
 #page-home .page-intro h1 { font-size: 2rem; margin-bottom: 4px; }
 #page-home .lede { font-size: .875rem; margin: 0; max-width: none; }
 .drill-breadcrumbs { margin-bottom: 10px; font-size: .875rem; }
-.overview-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto auto; max-width: 800px; column-gap: 32px; row-gap: 0; margin-bottom: 8px; padding: 12px var(--overview-content-inset) 20px; border: 0; }
-.overview-stats .stat-card { display: grid; grid-template-rows: subgrid; grid-row: span 3; padding: 0; border: 0; border-radius: 0; background: none; }
+.overview-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto auto; max-width: 1000px; column-gap: 32px; row-gap: 0; margin: 0 auto 8px; padding: 12px var(--overview-content-inset) 20px; border: 0; }
+.overview-stats .stat-card { display: grid; grid-template-rows: subgrid; grid-row: span 3; padding: 0; border: 0; border-radius: 0; background: none; text-align: center; }
 .overview-stats .stat-card h2 { margin-bottom: 4px; font-size: .8rem; }
 .overview-stats .stat-value { font-size: 1.7rem; margin: 0 0 3px; }
 .overview-stats .muted { font-size: .75rem; }
@@ -892,11 +892,14 @@ h1:focus,main:focus {
   .visual-primary, .visual-secondary { grid-template-columns: 1fr; }
   .composition-body { flex-wrap: nowrap; }
 }
+@media (max-width: 900px) {
+  .overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .overview-stats .stat-card:nth-child(n+3) { padding-top: 16px; }
+}
 @media (max-width: 600px) {
   .visual-scroll-hint { display: block; margin: 10px 0; font-size: .75rem; color: #4d5d70; }
   .city-container { --overview-content-inset:14px; }
   .overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; }
-  .overview-stats .stat-card:last-child { display: none; }
   .overview-stats .stat-value { font-size: 1.3rem; }
   #page-home .page-intro { padding-top: 14px; }
   #overview .chart-frame { padding: 14px; }

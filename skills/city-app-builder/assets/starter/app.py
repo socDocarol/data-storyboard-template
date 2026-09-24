@@ -34,6 +34,7 @@ from city_app.components import (
 )
 from city_app.data import (
     DIMENSIONS,
+    MISSING_LABEL,
     ORDERS,
     PROVIDERS,
     STATES,
@@ -387,6 +388,11 @@ def server(input: Inputs, output: Outputs, session: Session):
                     f"{source.label('category')} groups represented",
                     str(len(categories)),
                     f"{min(row.date for row in rows):%b %Y} to {max(row.date for row in rows):%b %Y}",
+                ),
+                stat_card(
+                    f"{source.label('area')} groups represented",
+                    str(len({row.area for row in rows if row.area != MISSING_LABEL})),
+                    "Missing labels excluded",
                 ),
                 class_="stats-grid overview-stats",
             ),

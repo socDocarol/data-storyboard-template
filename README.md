@@ -4,7 +4,7 @@
 
 City App Kit is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
-**v0.5.2 · Python Shiny · fictional sample-data edition**
+**v0.5.3 · Python Shiny · fictional sample-data edition**
 
 ![City App Kit overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
 
