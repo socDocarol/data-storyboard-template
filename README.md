@@ -11,7 +11,16 @@ Data Storyboard Template is a Python Shiny starter for City colleagues who want 
 Copy this message into a coding assistant that has access to this repository:
 
 ```text
-Help me make a data web app from this template: https://github.com/socDocarol/data-storyboard-template
+Help me build a data web app using this template:
+https://github.com/socDocarol/data-storyboard-template
+
+Before asking questions or writing code, read the repository's README.md and AGENTS.md, then follow skills/city-app-builder/SKILL.md.
+
+Guide me through the template's short discovery process. Reuse anything I have already told you, ask only the missing questions one at a time, and aim for no more than three. Recommend sensible defaults instead of asking me to make technical decisions.
+
+Once the essentials are clear, create my app in a new folder using the bundled starter. Adapt it to my purpose, preserve the template and existing apps, and begin with clearly labeled sample data.
+
+Build and run a working local preview, check its main views and interactions, and explain exactly how I can open it and what is still sample data. Keep your explanations short and practical.
 ```
 
 Your assistant will ask a few short questions and create your app in a new folder using clearly labeled sample data.

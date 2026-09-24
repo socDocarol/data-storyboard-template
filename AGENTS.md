@@ -2,9 +2,7 @@
 
 ## When the user wants an app from this template
 
-You are the coding agent receiving a request such as:
-
-> Help me make a data web app from this template: https://github.com/socDocarol/data-storyboard-template
+You are the coding agent helping the user build a new app from this template. The copyable starting request is in [Create your own app](README.md#create-your-own-app). Treat that request as authorization to build the local prototype once the essential choices are clear.
 
 Start by reading [skills/city-app-builder/SKILL.md](skills/city-app-builder/SKILL.md). It is the entry point for the conversation, source boundaries, visual choices, build steps, and handoff. Follow its links only when the current task needs them.
 

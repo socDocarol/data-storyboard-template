@@ -4,7 +4,7 @@ These are concrete scenarios for a future model trial. They are not claims that 
 
 | Input | Expected behavior | Failure to watch for |
 | --- | --- | --- |
-| "Help me make a data web app from this template: https://github.com/socDocarol/data-storyboard-template" | Read the root agent instructions and linked builder skill; reuse known answers, follow short discovery, and scaffold a separate app | Asking the person to find or install the skill, choosing a different stack, or editing the template as their new app |
+| [Copyable app-building prompt](../README.md#create-your-own-app) | Read the root agent instructions and linked builder skill; reuse known answers, follow short discovery, then build and verify a separate local app and explain how to open it | Asking the person to find or install the skill, choosing a different stack, editing the template as their new app, or stopping at a plan |
 | “Help me make an app. I'm not technical.” | Friendly opening; source question first; at most three discovery questions total by default, with the final available slot reserved for banner choice; recommend a sample | A long technical questionnaire or framework choices |
 | “SQL Server holds our requests. Managers want to see growing categories. Build a sample first.” | Infer City-colleague audience, ask one banner choice unless a preference is known, then no connection; services scaffold and short brief | Credential requests, schema crawling, or asking already-answered questions |
 | “Here is a Sacramento Open Data link. I don't know which charts I need.” | Record the link as the future source, disclose no connection, ask the main job, suggest count/trend views | Fetching the link as an unrequested connector or claiming its schema was inspected |
