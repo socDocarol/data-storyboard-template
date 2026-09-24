@@ -47,4 +47,4 @@ The included visual guide is a snapshot of the source guide at kit creation. Upd
 python scripts/package.py
 ```
 
-The output is `dist/city-app-kit-0.5.3.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.
+The output is `dist/data-storyboard-template-0.5.3.zip`. The packager selects the product files explicitly, excludes environments/caches/logs, verifies archive paths and CRCs, and prints a checksum. Extract it into a new development folder to share it. No global skill installation, repository push, or deployment occurs.

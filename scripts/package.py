@@ -65,13 +65,13 @@ def product_files():
 
 
 def main():
-    destination = ROOT / "dist" / f"city-app-kit-{VERSION}.zip"
+    destination = ROOT / "dist" / f"data-storyboard-template-{VERSION}.zip"
     destination.parent.mkdir(exist_ok=True)
     files = list(product_files())
     with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in files:
             relative = path.relative_to(ROOT)
-            archive.write(path, (Path("city-app-kit") / relative).as_posix())
+            archive.write(path, (Path("data-storyboard-template") / relative).as_posix())
     with zipfile.ZipFile(destination) as archive:
         if archive.testzip():
             raise ValueError("Archive CRC validation failed.")

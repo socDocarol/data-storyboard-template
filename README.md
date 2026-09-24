@@ -1,12 +1,12 @@
-# City App Kit
+# Data Storyboard Template
 
 **Turn a question about City work into a visual, local data app—with a short conversation in your coding assistant.**
 
-City App Kit is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
+Data Storyboard Template is a Python Shiny starter for City colleagues who want to build an explorable, visuals-first data app without beginning from a blank page. It includes a guided app-building skill, reusable City-styled components, and clearly labeled fictional examples to make the first version concrete.
 
 **v0.5.3 · Python Shiny · fictional sample-data edition**
 
-![City App Kit overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
+![Data Storyboard Template overview: trends, rankings, composition, heatmap, and records](docs/images/overview.png)
 
 ## Start here: preview the sample
 
@@ -15,8 +15,8 @@ You need **Windows and Python 3.12**. No manual package-install steps are needed
 1. Clone or download this kit into a normal development folder:
 
    ```powershell
-   git clone https://github.com/socDocarol/city-app-kit.git
-   cd city-app-kit
+   git clone https://github.com/socDocarol/data-storyboard-template.git
+   cd data-storyboard-template
    ```
 
 2. Open [Preview sample.cmd](Preview%20sample.cmd).
